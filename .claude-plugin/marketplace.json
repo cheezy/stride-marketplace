@@ -1,0 +1,23 @@
+{
+  "name": "stride-marketplace",
+  "owner": {
+    "name": "Jeff Morgan",
+    "email": "cheezy@letstango.ca"
+  },
+  "metadata": {
+    "description": "Stride task management skills for AI agents",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "stride",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/cheezy/stride.git"
+      },
+      "description": "Task lifecycle skills for Stride kanban: claiming, completing, creating tasks and goals",
+      "version": "1.0.0",
+      "strict": true
+    }
+  ]
+}
