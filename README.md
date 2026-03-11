@@ -21,11 +21,16 @@ Add this marketplace to Claude Code:
 /plugin install stride@stride-marketplace
 ```
 
-**What you get:**
+**Skills:**
 - `stride-claiming-tasks` - Proper task claiming with hook execution
 - `stride-completing-tasks` - Proper task completion with validation hooks
 - `stride-creating-tasks` - Comprehensive task specification enforcement
 - `stride-creating-goals` - Goal and batch creation with dependency management
+- `stride-subagent-workflow` - Subagent orchestration for exploration, planning, and code review (Claude Code only)
+
+**Agents:**
+- `stride:task-explorer` - Targeted codebase exploration after claiming a task, guided by key_files and patterns_to_follow
+- `stride:task-reviewer` - Pre-completion code review validating changes against acceptance_criteria and pitfalls
 
 **Repository:** https://github.com/cheezy/stride
 
