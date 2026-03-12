@@ -21,13 +21,13 @@ Add this marketplace to Claude Code:
 /plugin install stride@stride-marketplace
 ```
 
-**Skills:**
-- `stride-claiming-tasks` - Proper task claiming with hook execution and optional enrichment
-- `stride-completing-tasks` - Proper task completion with validation hooks and diagnostician-assisted debugging
-- `stride-creating-tasks` - Comprehensive task specification enforcement
-- `stride-creating-goals` - Goal and batch creation with dependency management
-- `stride-enriching-tasks` - Transforms minimal task specs into full implementation-ready specifications
-- `stride-subagent-workflow` - Subagent orchestration for decomposition, exploration, planning, and code review (Claude Code only)
+**Skills (all MANDATORY — each contains required API fields only documented in that skill):**
+- `stride-claiming-tasks` - MANDATORY before GET /api/tasks/next or POST /api/tasks/claim
+- `stride-completing-tasks` - MANDATORY before PATCH /api/tasks/:id/complete
+- `stride-creating-tasks` - MANDATORY before POST /api/tasks (work tasks or defects)
+- `stride-creating-goals` - MANDATORY before POST /api/tasks/batch (goals with nested tasks)
+- `stride-enriching-tasks` - MANDATORY when task has empty key_files/testing_strategy/verification_steps
+- `stride-subagent-workflow` - MANDATORY after claiming any task, before implementation (Claude Code only)
 
 **Agents:**
 - `stride:task-decomposer` - Breaks goals and large tasks into dependency-ordered child tasks
