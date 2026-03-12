@@ -14,7 +14,7 @@ Add this marketplace to Claude Code:
 
 ### Stride
 
-**Description:** Task lifecycle skills for Stride kanban: claiming, completing, creating tasks and goals
+**Description:** Task lifecycle skills for Stride kanban: claiming, completing, creating tasks and goals, enriching tasks, and subagent orchestration
 
 **Install:**
 ```bash
@@ -22,15 +22,18 @@ Add this marketplace to Claude Code:
 ```
 
 **Skills:**
-- `stride-claiming-tasks` - Proper task claiming with hook execution
-- `stride-completing-tasks` - Proper task completion with validation hooks
+- `stride-claiming-tasks` - Proper task claiming with hook execution and optional enrichment
+- `stride-completing-tasks` - Proper task completion with validation hooks and diagnostician-assisted debugging
 - `stride-creating-tasks` - Comprehensive task specification enforcement
 - `stride-creating-goals` - Goal and batch creation with dependency management
-- `stride-subagent-workflow` - Subagent orchestration for exploration, planning, and code review (Claude Code only)
+- `stride-enriching-tasks` - Transforms minimal task specs into full implementation-ready specifications
+- `stride-subagent-workflow` - Subagent orchestration for decomposition, exploration, planning, and code review (Claude Code only)
 
 **Agents:**
+- `stride:task-decomposer` - Breaks goals and large tasks into dependency-ordered child tasks
 - `stride:task-explorer` - Targeted codebase exploration after claiming a task, guided by key_files and patterns_to_follow
 - `stride:task-reviewer` - Pre-completion code review validating changes against acceptance_criteria and pitfalls
+- `stride:hook-diagnostician` - Analyzes hook failure output and returns a prioritized fix plan
 
 **Repository:** https://github.com/cheezy/stride
 
