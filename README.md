@@ -14,7 +14,7 @@ Add this marketplace to Claude Code:
 
 ### Stride
 
-**Description:** Task lifecycle skills for Stride kanban: claiming, completing, creating tasks and goals, enriching tasks, and subagent orchestration
+**Description:** Task lifecycle skills for Stride kanban: claiming, completing, creating tasks and goals, enriching tasks, subagent orchestration, and automatic hook execution via Claude Code hooks
 
 **Install:**
 ```bash
@@ -33,7 +33,20 @@ Add this marketplace to Claude Code:
 - `stride:task-decomposer` - Breaks goals and large tasks into dependency-ordered child tasks
 - `stride:task-explorer` - Targeted codebase exploration after claiming a task, guided by key_files and patterns_to_follow
 - `stride:task-reviewer` - Pre-completion code review validating changes against acceptance_criteria and pitfalls
-- `stride:hook-diagnostician` - Analyzes hook failure output and returns a prioritized fix plan
+- `stride:hook-diagnostician` - Analyzes hook failure output (structured JSON or raw text) and returns a prioritized fix plan
+
+**Automatic Hook Execution (v1.5.0):**
+
+The plugin ships Claude Code hooks that automatically execute `.stride.md` commands without permission prompts. When the plugin is enabled, Stride API calls are detected and the corresponding hook section runs as a shell process on the harness — bypassing Claude's tool permission layer entirely.
+
+| Claude Code Event | API Pattern | Stride Hook |
+|---|---|---|
+| PostToolUse (Bash) | `/api/tasks/claim` | `before_doing` |
+| PreToolUse (Bash) | `/api/tasks/:id/complete` | `after_doing` (blocks on failure) |
+| PostToolUse (Bash) | `/api/tasks/:id/complete` | `before_review` |
+| PostToolUse (Bash) | `/api/tasks/:id/mark_reviewed` | `after_review` |
+
+Task environment variables (`$TASK_IDENTIFIER`, `$TASK_TITLE`, etc.) are cached from the claim response and available to all hooks. Structured JSON diagnostics are emitted on both success and failure for integration with the hook-diagnostician agent.
 
 **Repository:** https://github.com/cheezy/stride
 
