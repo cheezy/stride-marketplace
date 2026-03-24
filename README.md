@@ -35,7 +35,7 @@ Add this marketplace to Claude Code:
 - `stride:task-reviewer` - Pre-completion code review validating changes against acceptance_criteria and pitfalls
 - `stride:hook-diagnostician` - Analyzes hook failure output (structured JSON or raw text) and returns a prioritized fix plan
 
-**Automatic Hook Execution (v1.5.0):**
+**Automatic Hook Execution (v1.5.0+):**
 
 The plugin ships Claude Code hooks that automatically execute `.stride.md` commands without permission prompts. When the plugin is enabled, Stride API calls are detected and the corresponding hook section runs as a shell process on the harness — bypassing Claude's tool permission layer entirely.
 
