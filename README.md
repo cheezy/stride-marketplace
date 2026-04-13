@@ -22,6 +22,8 @@ Add this marketplace to Claude Code:
 ```
 
 **Skills (all MANDATORY — each contains required API fields only documented in that skill):**
+
+- `stride-workflow` - RECOMMENDED entry point — single orchestrator for the complete task lifecycle (claim → explore → implement → review → complete)
 - `stride-claiming-tasks` - MANDATORY before GET /api/tasks/next or POST /api/tasks/claim
 - `stride-completing-tasks` - MANDATORY before PATCH /api/tasks/:id/complete
 - `stride-creating-tasks` - MANDATORY before POST /api/tasks (work tasks or defects)
