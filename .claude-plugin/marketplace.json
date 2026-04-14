@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Stride task management skills for AI agents",
-    "version": "1.7.2"
+    "version": "1.7.3"
   },
   "plugins": [
     {
@@ -16,7 +16,7 @@
         "url": "https://github.com/cheezy/stride.git"
       },
       "description": "Task lifecycle skills for Stride kanban: claiming, completing, creating tasks and goals, enriching tasks, workflow orchestration, subagent dispatch, and automatic hook execution via Claude Code hooks",
-      "version": "1.7.2",
+      "version": "1.7.3",
       "strict": true
     }
   ]
