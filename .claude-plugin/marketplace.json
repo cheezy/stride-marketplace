@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Stride task management skills for AI agents",
-    "version": "1.13.0"
+    "version": "1.14.0"
   },
   "plugins": [
     {
@@ -25,8 +25,8 @@
         "source": "url",
         "url": "https://github.com/cheezy/security-review.git"
       },
-      "description": "AI-powered security review of code changes via the /security-review slash command. Detects injection, authentication and authorization flaws, data exposure, cryptographic weaknesses, input validation gaps, race conditions, XSS/code execution, and insecure configuration — semantic analysis, not pattern matching. Loosely based on anthropics/claude-code-security-review.",
-      "version": "1.0.0",
+      "description": "AI-powered security review via /security-review. Two scan modes: diff (default, PR-gating) and --full (codebase posture check, batched). Detects injection, auth flaws, data exposure, weak crypto, input-validation gaps, race conditions, XSS/code execution, and insecure configuration — semantic analysis, not pattern matching. Loosely based on anthropics/claude-code-security-review.",
+      "version": "1.1.0",
       "strict": true
     }
   ]
