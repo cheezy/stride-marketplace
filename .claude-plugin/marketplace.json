@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Stride task management skills for AI agents",
-    "version": "1.12.0"
+    "version": "1.13.0"
   },
   "plugins": [
     {
@@ -17,6 +17,16 @@
       },
       "description": "Task lifecycle skills for Stride kanban: claiming, completing, creating tasks and goals, enriching tasks, workflow orchestration, subagent dispatch, and automatic hook execution via Claude Code hooks",
       "version": "1.12.0",
+      "strict": true
+    },
+    {
+      "name": "security-review",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/cheezy/security-review.git"
+      },
+      "description": "AI-powered security review of code changes via the /security-review slash command. Detects injection, authentication and authorization flaws, data exposure, cryptographic weaknesses, input validation gaps, race conditions, XSS/code execution, and insecure configuration — semantic analysis, not pattern matching. Loosely based on anthropics/claude-code-security-review.",
+      "version": "1.0.0",
       "strict": true
     }
   ]
