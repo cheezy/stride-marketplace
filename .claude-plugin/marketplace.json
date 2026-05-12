@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Stride task management skills for AI agents",
-    "version": "1.15.2"
+    "version": "1.15.3"
   },
   "plugins": [
     {
@@ -27,6 +27,16 @@
       },
       "description": "AI-powered security review via /security-review:security-review (use the namespaced form — the bare /security-review conflicts with a Claude Code built-in that ignores this plugin's flags). Two scan modes: diff (default, PR-gating) and --full (codebase posture check, batched with cross-batch dedup and skipped-files reporting). Detects 10 universal vulnerability classes plus 5 MAESTRO-derived agentic-AI classes (prompt injection, tool abuse, agent trust boundary, model output execution, vector-store poisoning). Three framework rule packs ship at launch (Django/Python, Phoenix/Elixir, Rails/Ruby) plus a multi-platform CI/CD pipeline pack (8 platforms). Every finding carries CWE-ID and OWASP Top 10 references. Opt-in flags: --maestro (7-layer threat classification), --rci [N] (recursive criticism passes), --baseline (suppress acknowledged findings), --patches (surgical-fix unified diffs). Semantic analysis, not pattern matching. Loosely based on anthropics/claude-code-security-review.",
       "version": "1.2.2",
+      "strict": true
+    },
+    {
+      "name": "stride-ideation",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/cheezy/stride-ideation.git"
+      },
+      "description": "Turn a fuzzy idea into shipped Stride tasks via three slash commands. /stride-ideation:ideate drives an interactive round-based question loop (up to 4 batched AskUserQuestion per round, mandatory round-3 framing checkpoint, seven hard-gated requirements sections, advisory requirements-reviewer pass) and writes a committed requirements markdown doc — the terminal state, never auto-funnels into the next step. /stride-ideation:decompose converts the requirements doc into a Stride batch JSON via the requirements-decomposer subagent (canonical batch shape embedded; two-reason multi-goal split rule of code-coupling plus ~10-task soft cap; cross-goal claim ordering documented in decomposition_notes). /stride-ideation:ship validates the batch structure, drift-checks source_spec_sha256 against the requirements doc with a prompt-and-abort flow, strips local-audit fields, and POSTs to /api/tasks/batch with token hygiene (no curl -v, no token in logs or errors). Replaces superpowers:brainstorming for Stride projects; the two skills coexist for non-Stride projects where brainstorming remains the right fit.",
+      "version": "0.1.0",
       "strict": true
     }
   ]
