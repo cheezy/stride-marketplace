@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Stride task management skills for AI agents",
-    "version": "1.20.0"
+    "version": "1.21.0"
   },
   "plugins": [
     {
@@ -25,8 +25,8 @@
         "source": "url",
         "url": "https://github.com/cheezy/stride-security-review.git"
       },
-      "description": "AI-powered security review via /stride-security-review:security-review. (Renamed from `security-review` in v2.0.0 to eliminate the namespace collision with Claude Code's built-in /security-review command — see CHANGELOG for migration notes.) Two scan modes: diff (default, PR-gating) and --full (codebase posture check, batched with cross-batch dedup and skipped-files reporting). Detects 10 universal vulnerability classes plus 5 MAESTRO-derived agentic-AI classes (prompt injection, tool abuse, agent trust boundary, model output execution, vector-store poisoning). Three framework rule packs ship at launch (Django/Python, Phoenix/Elixir, Rails/Ruby) plus a multi-platform CI/CD pipeline pack (8 platforms). Every finding carries CWE-ID and OWASP Top 10 references. Opt-in flags: --maestro (7-layer threat classification), --rci [N] (recursive criticism passes), --baseline (suppress acknowledged findings), --patches (surgical-fix unified diffs). Semantic analysis, not pattern matching. Loosely based on anthropics/claude-code-security-review.",
-      "version": "2.0.0",
+      "description": "AI-powered security review via /stride-security-review:security-review. Two scan modes: diff (default, PR-gating) and --full (codebase posture check, batched with cross-batch dedup and skipped-files reporting). Detects 10 universal vulnerability classes plus 5 MAESTRO-derived agentic-AI classes (prompt injection, tool abuse, agent trust boundary, model output execution, vector-store poisoning). Framework rule packs (Django/Python, Phoenix/Elixir — now including a Phoenix mass-assignment rule — and Rails/Ruby) plus a multi-platform CI/CD pipeline pack (8 platforms). Every finding carries CWE-ID and OWASP Top 10 references. Opt-in flags: --maestro (7-layer threat classification), --rci [N] (recursive criticism passes), --baseline (suppress acknowledged findings), --patches (surgical-fix unified diffs), --fail-on <severity> (CI exit-code gate), --base <ref> (PR-against-base diff scope), --sarif (SARIF v2.1.0 output for GitHub Code Scanning). Ships a reference GitHub Actions workflow and a TAP 13 eval runner over 24 fixtures. Semantic analysis, not pattern matching. Loosely based on anthropics/claude-code-security-review.",
+      "version": "2.1.0",
       "strict": true
     },
     {
