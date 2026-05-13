@@ -17,7 +17,7 @@ Then install any subset of the plugins below.
 | Plugin | Version | One-line summary |
 |---|---|---|
 | [`stride`](#stride) | 1.12.0 | Task lifecycle for Stride kanban — claim, complete, create, decompose, with automatic Claude Code hook execution |
-| [`stride-security-review`](#stride-security-review) | 2.2.0 | AI-powered security review of code changes with per-framework rule packs and SARIF / CI integration |
+| [`stride-security-review`](#stride-security-review) | 2.3.0 | AI-powered security review of code changes — seven framework rule packs (Android, Django, Express, iOS, Phoenix, Rails, React/Next.js), CI/CD pack, defense-in-depth pack, with SARIF / CI integration |
 | [`stride-ideation`](#stride-ideation) | 0.5.0 | Turn a fuzzy idea into a committed requirements doc and Stride tasks via two slash commands |
 
 ---
@@ -89,7 +89,14 @@ AI-powered security review of code changes via the `/stride-security-review:secu
 
 - **10 universal vulnerability classes** — injection (SQL, command, LDAP, NoSQL, XXE, template, header), authentication, authorization, data exposure, cryptography, input validation, race conditions, XSS / code execution, insecure configuration, supply chain.
 - **5 MAESTRO-derived agentic-AI classes** (when the file imports an LLM/agent/MCP SDK) — prompt injection, tool abuse, agent trust boundary, model output execution, vector-store poisoning.
-- **Framework rule packs** (substantially expanded in 2.2.0) — Django/Python (8 rules), Phoenix/Elixir (9 rules), Rails/Ruby (8 rules). Includes open-redirect across all three, deserialization (`pickle` / `yaml` / `signing.loads` and `Marshal` / `YAML` / `YAML.unsafe_load`), Django SSRF with AWS IMDS / GCP / Azure metadata focus, DRF `ModelSerializer fields='__all__'`, production-settings hardening, Phoenix.Token replay, `System.cmd` shell-wrapper injection, LiveView upload guards, Rails `connection.execute` injection, missing `authenticate_user!`, and unfiltered JSON model render leaking `password_digest` / `*_token` / `*_secret` / `encrypted_*`.
+- **Seven framework rule packs** (Android/Kotlin, Django/Python, Express/Node.js, iOS/Swift, Phoenix/Elixir, Rails/Ruby, React/Next.js — covering the full mobile + web + Node ecosystem). Highlights:
+  - **Android/Kotlin** — exported components without signature permission, WebView `setJavaScriptEnabled` + `addJavascriptInterface` RCE, cleartext traffic, SharedPreferences storing credentials, SQLite injection, trust-all `HostnameVerifier` / `X509TrustManager`. Activates on `.kt` / `.java` / `.gradle` imports OR `AndroidManifest.xml` content.
+  - **Django/Python** — `mark_safe`, `extra` / `raw()` SQL interpolation, CSRF disabled, production settings hardening (DEBUG / ALLOWED_HOSTS / SECURE_*), mass-assignment, open-redirect, deserialization, SSRF with cloud-metadata focus, DRF `ModelSerializer fields='__all__'`.
+  - **Express/Node.js** — reflected XSS via `res.send(req.query.x)`, `eval` / `Function()` / `vm.runInNewContext` RCE, `child_process.exec` shell injection, Mongoose `Model.find(req.body)` NoSQL operator injection, prototype pollution via `lodash.merge` / `_.set`.
+  - **iOS/Swift** — sensitive data in `UserDefaults` instead of Keychain, WKWebView file access + JS bridge, ATS `NSAllowsArbitraryLoads`, URLSession trust-all delegate, deep-link missing re-auth. Activates on Swift / Obj-C / Obj-C++ imports OR `Info.plist` content.
+  - **Phoenix/Elixir** — `Phoenix.HTML.raw/1`, missing `force_ssl`, CSRF, `Ecto.Query.fragment` interpolation, LiveView scope, changeset mass-assignment, `Phoenix.Token` replay, `System.cmd` shell, LiveView `allow_upload` guards, open-redirect.
+  - **Rails/Ruby** — `html_safe` / `raw`, `find_by_sql` / `connection.execute` interpolation, `protect_from_forgery` disabled, `params.permit!`, `eval` / `send`, open-redirect, `Marshal.load` / `YAML.load` deserialization, missing `authenticate_user!`, unfiltered `render json: @user` leaking `password_digest` / `*_token` / `*_secret`.
+  - **React/Next.js** — `dangerouslySetInnerHTML` XSS, Next.js API route missing auth, redirect open-redirect, `<a href={user_url}>` with `javascript:` scheme bypass, `getServerSideProps` / Route Handler secret-leak via props.
 - **CI/CD pipeline pack** — five rules across eight platforms (GitHub Actions, GitLab CI, CircleCI, Bitbucket Pipelines, Jenkins, Azure Pipelines, Drone, Tekton).
 - **Web defense-in-depth pack** — framework-agnostic checks for missing CSP, HSTS, X-Frame-Options, and `Set-Cookie` without `Secure` / `HttpOnly` / `SameSite`.
 
@@ -113,7 +120,7 @@ Every finding carries CWE-ID and OWASP Top 10 references.
 **Ships:**
 
 - A reference GitHub Actions workflow (`.github/workflows/security-review.yml`) that gates PRs via a belt-and-suspenders `jq + claude_exit` check.
-- A TAP 13 eval runner (`scripts/run_eval.sh`) over 40+ fixtures with both positive-control (assert finding fires) and negative-control (assert finding does NOT fire) coverage. Includes its own CI workflow that re-runs the eval on every change to the agent prompt.
+- A TAP 13 eval runner (`scripts/run_eval.sh`) over 64 fixtures with both positive-control (assert finding fires) and negative-control (assert finding does NOT fire) coverage. Includes its own CI workflow that re-runs the eval on every change to the agent prompt.
 
 **Loosely based on** [`anthropics/claude-code-security-review`](https://github.com/anthropics/claude-code-security-review).
 
