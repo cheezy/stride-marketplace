@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Stride task management skills for AI agents",
-    "version": "1.23.0"
+    "version": "1.24.0"
   },
   "plugins": [
     {
@@ -36,7 +36,7 @@
         "url": "https://github.com/cheezy/stride-ideation.git"
       },
       "description": "Turn a fuzzy idea into shipped Stride tasks via two slash commands. /stride-ideation:ideate drives an interactive round-based question loop (up to 4 batched AskUserQuestion per round, mandatory round-3 framing checkpoint, mandatory round-4 premortem in v0.3.0, seven hard-gated requirements sections with shape requirements on Assumptions — ranked highest-to-lowest risk with the riskiest marked — and Success Metrics — both leading and lagging indicators required — advisory requirements-reviewer pass) and writes a committed requirements markdown doc — the terminal state, never auto-funnels into the next step. New in v0.4.0: a --profile <lean|product|discovery> flag selects the round structure and reviewer rubric (lean = default, byte-for-byte v0.3.0; product = JTBD four-forces in Round 1 + optional Concrete Example section; discovery = Why-now + Alternative-options in Round 2). New in v0.5.0: a fourth --profile=lean-startup value adds a mandatory Round-5 MVP-design batch anchored on the (R)-marked Assumptions entry, an optional MVP / Validation experiment section in the doc, and two profile-aware advisory reviewer checks (MVP section presence, falsifiable success/failure criteria) — source techniques: Eric Ries (Lean Startup), Steve Blank (Customer Development), Giff Constable (Riskiest Assumption Test). /stride-ideation:stridify (new in v0.2.0; merged from the previous /decompose + /ship pair) takes the requirements doc and runs the full pipeline end-to-end: validates the seven sections, preflights auth from .stride_auth.md, dispatches the requirements-decomposer subagent (canonical batch shape embedded; two-reason multi-goal split rule of code-coupling plus ~10-task soft cap; cross-goal claim ordering documented in decomposition_notes), stamps source_spec + source_spec_sha256, writes and commits a sibling timestamped batch JSON for audit, then strips local-audit fields and POSTs to /api/tasks/batch with token hygiene (no curl -v, no token in logs or errors), rendering the created G/W identifiers. Replaces superpowers:brainstorming for Stride projects; the two skills coexist for non-Stride projects where brainstorming remains the right fit.",
-      "version": "0.5.0",
+      "version": "0.6.0",
       "strict": true
     }
   ]
