@@ -16,7 +16,7 @@ Then install any subset of the plugins below.
 
 | Plugin | Version | One-line summary |
 |---|---|---|
-| [`stride`](#stride) | 1.12.0 | Task lifecycle for Stride kanban — claim, complete, create, decompose, with automatic Claude Code hook execution |
+| [`stride`](#stride) | 1.13.0 | Task lifecycle for Stride kanban — claim, complete, create, decompose, with automatic Claude Code hook execution |
 | [`stride-security-review`](#stride-security-review) | 2.3.0 | AI-powered security review of code changes — seven framework rule packs (Android, Django, Express, iOS, Phoenix, Rails, React/Next.js), CI/CD pack, defense-in-depth pack, with SARIF / CI integration |
 | [`stride-ideation`](#stride-ideation) | 0.5.0 | Turn a fuzzy idea into a committed requirements doc and Stride tasks via two slash commands |
 
