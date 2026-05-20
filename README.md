@@ -16,7 +16,7 @@ Then install any subset of the plugins below.
 
 | Plugin | Version | One-line summary |
 |---|---|---|
-| [`stride`](#stride) | 1.14.0 | Task lifecycle for Stride kanban — claim, complete, create, decompose, with automatic Claude Code hook execution and per-file diff capture (G148/W719 contract) |
+| [`stride`](#stride) | 1.14.1 | Task lifecycle for Stride kanban — claim, complete, create, decompose, with automatic Claude Code hook execution and per-file diff capture (G148/W719 contract) |
 | [`stride-security-review`](#stride-security-review) | 2.3.0 | AI-powered security review of code changes — seven framework rule packs (Android, Django, Express, iOS, Phoenix, Rails, React/Next.js), CI/CD pack, defense-in-depth pack, with SARIF / CI integration |
 | [`stride-ideation`](#stride-ideation) | 0.7.0 | Turn a fuzzy idea into a committed requirements doc and Stride tasks via two slash commands. v0.7.0: four-layer resilience model on `/stridify` (preflight advisory, `--goal` per-seam partitioning, bounded subagent-dispatch retry, retry-exhaustion fallback) |
 
@@ -52,6 +52,8 @@ Task lifecycle skills for Stride kanban: claiming, completing, creating tasks an
 **Per-File Diff Capture (v1.14.0+):**
 
 The plugin implements the G148/W719 per-file diff JSON contract. The `after_doing` hook captures `git diff $TASK_BASE_REF..HEAD` per changed file, truncates each diff at exactly 500 lines with the contract marker, emits the binary placeholder for files git marks binary in `--numstat`, and writes the resulting JSON array to `.stride-changed-files.json` for the completion payload to carry as the optional `changed_files` field. Reviewers see per-file unified-patch text inline in the Stride review queue. The field is optional — legacy completions without `changed_files` continue to validate.
+
+**v1.14.1+:** the canonical API Request Format example body and the pre-completion verification checklist in `stride-completing-tasks/SKILL.md` both surface `changed_files` directly, so agents reading the standard example are prompted to embed the snapshot during normal payload assembly (no need to find the dedicated optional section first).
 
 **Explorer/Reviewer Result Enforcement (v1.9.0+):**
 
