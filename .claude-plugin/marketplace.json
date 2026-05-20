@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Stride task management skills for AI agents",
-    "version": "1.26.0"
+    "version": "1.27.0"
   },
   "plugins": [
     {
@@ -15,8 +15,8 @@
         "source": "url",
         "url": "https://github.com/cheezy/stride.git"
       },
-      "description": "Task lifecycle skills for Stride kanban: claiming, completing, creating tasks and goals, enriching tasks, workflow orchestration, subagent dispatch, and automatic hook execution via Claude Code hooks. v1.13.0+: the task-reviewer agent emits a structured, parseable JSON review-report block alongside the prose summary, so downstream tooling can extract per-severity issue counts, per-issue file:line locations, and acceptance-criteria coverage.",
-      "version": "1.13.0",
+      "description": "Task lifecycle skills for Stride kanban: claiming, completing, creating tasks and goals, enriching tasks, workflow orchestration, subagent dispatch, and automatic hook execution via Claude Code hooks. v1.14.0+: implements the G148/W719 per-file diff JSON contract — the after_doing hook now captures `git diff $TASK_BASE_REF..HEAD` per changed file, truncates at exactly 500 lines with the contract marker, emits the binary placeholder for files git marks binary in --numstat, and writes the resulting JSON array to .stride-changed-files.json for the completion payload to carry as the optional `changed_files` field. Reviewers see per-file unified-patch text inline in the Stride review queue. Backward-compatible — legacy completions without changed_files continue to validate. v1.13.0+: the task-reviewer agent emits a structured, parseable JSON review-report block alongside the prose summary, so downstream tooling can extract per-severity issue counts, per-issue file:line locations, and acceptance-criteria coverage.",
+      "version": "1.14.0",
       "strict": true
     },
     {
