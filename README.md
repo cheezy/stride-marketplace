@@ -164,6 +164,17 @@ The `lean-startup` profile is anchored on the `(R)`-marked Assumption — source
 
 End-to-end pipeline from requirements doc to created Stride goals. Validates the seven required sections, preflights auth from `.stride_auth.md`, dispatches the `requirements-decomposer` subagent (canonical batch shape embedded; two-reason multi-goal split rule of code-coupling + ~10-task soft cap), stamps `source_spec` and `source_spec_sha256`, writes and commits a sibling timestamped batch JSON for audit, then strips local-audit fields and POSTs to `/api/tasks/batch` with token hygiene (no `curl -v`, no token in logs). Renders the created G/W identifiers.
 
+**Resilience model (v0.7.0+):** four layers that protect against transient Anthropic API capacity spikes and oversized many-surface decomposition runs. Activates only on the relevant trigger — v0.6.0 behavior is preserved byte-for-byte on the happy path.
+
+| Layer | Trigger | What happens |
+|---|---|---|
+| Preflight advisory | Doc enumerates >3 surfaces under `## Decomposition seams` AND `--goal` is unset | One-line stderr suggestion to use `--goal`; never blocks |
+| `--goal <name|index>` | User invokes per-surface dispatch | Prompt scoped to one seam (integer-index OR slug-match; both `--goal value` and `--goal=value` forms); per-goal batch JSON sits side-by-side via `sti_unique_path` |
+| Subagent dispatch retry | HTTP 529 / transient network / `overloaded` classification | 3 attempts, ~30s / ~90s backoff; terminal classifications (bad subagent, contract violation, hard 4xx) fail fast on attempt 1 |
+| Retry-exhaustion fallback | 3 consecutive transient failures | Writes `<source-stem>-decomposer-prompt.md` sibling with the assembled prompt, verbatim last error, and recovery README; **Stride API POST is NOT attempted** |
+
+The Stride API POST itself is still not retried — partial-batch idempotency is not guaranteed; the user remains the retry mechanism on a 4xx/5xx.
+
 **Repository:** <https://github.com/cheezy/stride-ideation>
 
 ---
