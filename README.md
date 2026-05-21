@@ -55,6 +55,8 @@ The plugin implements the G148/W719 per-file diff JSON contract. The `after_doin
 
 **v1.14.1+:** the canonical API Request Format example body and the pre-completion verification checklist in `stride-completing-tasks/SKILL.md` both surface `changed_files` directly, so agents reading the standard example are prompted to embed the snapshot during normal payload assembly (no need to find the dedicated optional section first).
 
+**v1.16.0+:** the `after_doing` hook PUTs `.stride-changed-files.json` to `/api/tasks/:id/changed_files` immediately after writing it to disk — URL and Bearer token are extracted from the intercepted agent completion command, fire-and-forget, no new env vars or `.stride_auth.md` read. PowerShell mirror in `hooks/stride-hook.ps1`. The agent's completion body no longer needs `changed_files` on a Stride server v1.16.0+ deployment (kanban W777 endpoint). The legacy inline-cat pattern is preserved in SKILL.md under a "Legacy inline pattern" subsection for back-compat against ≤ v1.15.x server deployments — both modes coexist.
+
 **Explorer/Reviewer Result Enforcement (v1.9.0+):**
 
 Every `/complete` call must include `explorer_result` and `reviewer_result` objects — either a dispatched subagent result or a self-reported skip with a reason from the fixed enum. Summary must be at least 40 non-whitespace characters. Server validates in grace mode (log + succeed) until the strict flag is flipped after all plugins release, then rejects with 422.
