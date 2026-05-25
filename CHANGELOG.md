@@ -2,6 +2,20 @@
 
 All notable changes to the Stride marketplace pin set will be documented in this file.
 
+## [1.30.3] - 2026-05-25
+
+### Changed
+
+- **`.claude-plugin/marketplace.json`** — Bumped the `stride` plugin pin from `1.17.2` to `1.17.3` so `/plugin update stride@stride-marketplace` picks up the **content-only review_queue scoring emphasis release** (W850 / W851 / W852 bundled under W873). v1.17.3 strengthens three SKILL.md files — `stride-creating-tasks`, `stride-enriching-tasks`, and `stride-creating-goals` — to name the four fields the review_queue dashboard scores at completion (`acceptance_criteria`, `testing_strategy`, `pitfalls`, `patterns_to_follow`) and the empty-pill consequence of omitting any of them. Each skill gains a top-of-file ⚠️ REVIEW QUEUE SCORING callout co-located with the existing MANDATORY / Iron Law callouts; the same four fields are reinforced inside each skill's existing Red Flags - STOP / Rationalization Table / Phase 4 checklist / Task Nesting Rules structures (no new top-level sections introduced). `stride-enriching-tasks` specifically promotes the four fields to individual mandatory-for-review items in the Phase 4 16-item pre-submission checklist (replacing the prior single-line bundling); `stride-creating-goals` stresses that nested tasks are graded individually — no "it's just a subtask" discount, and the goal-level `description` does not satisfy nested-task fields. The plugin description in this file is updated in lockstep so the marketplace search/listing surface reflects the new emphasis. Marketplace `metadata.version` patch-bumped from `1.30.2` to `1.30.3` to match.
+
+### Backward compatibility
+
+Identical to v1.30.2 at the user-visible behavior surface. The plugin-level update is content-only — no hook script, parser contract, env-var matrix, API field shape, or workflow step changed. Every existing task-creation, enrichment, and goal-creation call continues to validate without modification. No `.stride.md`, `.stride_auth.md`, or `.gitignore` changes are required. Agents that already populate the four scored fields see no behavior change; agents that previously skipped them now get explicit prose about the downstream review_queue scoring consequence.
+
+### Source
+
+Stride plugin release: https://github.com/cheezy/stride/releases/tag/v1.17.3 — content-only emphasis release for G166 (W850 / W851 / W852 SKILL.md edits) and W873 (this release). Patch release because the changes are documentation-only emphasis updates inside three SKILL.md files. The goal of the change set is to raise the floor on the four fields the review_queue dashboard scores at completion, so empty pills become rare rather than common.
+
 ## [1.30.2] - 2026-05-25
 
 ### Changed
