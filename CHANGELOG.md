@@ -2,6 +2,20 @@
 
 All notable changes to the Stride marketplace pin set will be documented in this file.
 
+## [1.30.4] - 2026-05-25
+
+### Fixed
+
+- **`README.md`** — The `Available Plugins` summary table at the top of the README listed the `stride` plugin at the long-stale version `1.14.1`. This row was the user-visible plugin catalog and had not been bumped during the v1.30.0 / v1.30.1 / v1.30.2 / v1.30.3 marketplace releases — six stride plugin patch / minor releases (v1.15.0 → v1.17.3) had landed in `.claude-plugin/marketplace.json` without the table row catching up. The row now reflects `1.17.3` and its one-line summary surfaces the `## after_goal` hook addition (v1.17.0+) and the four review_queue-scored fields emphasis (v1.17.3+) — the two visible feature deltas since 1.14.1. The `stride-security-review` row (`2.3.0`) and the `stride-ideation` row (`0.7.0`) were already in sync with `marketplace.json`; no edits required there.
+
+### Backward compatibility
+
+Identical to v1.30.3 at the user-visible behavior surface — this release exists solely to correct the stale `stride` row in the README table. The pin set in `.claude-plugin/marketplace.json` is byte-identical to v1.30.3 (stride 1.17.3, stride-security-review 2.3.0, stride-ideation 0.7.0). Marketplace `metadata.version` patch-bumps from `1.30.3` to `1.30.4` to match.
+
+### Source
+
+W874 — caught by the user post-v1.30.3 release; folded into a follow-up release rather than amending the published 1.30.3 tag.
+
 ## [1.30.3] - 2026-05-25
 
 ### Changed
