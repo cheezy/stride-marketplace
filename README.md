@@ -16,7 +16,7 @@ Then install any subset of the plugins below.
 
 | Plugin | Version | One-line summary |
 |---|---|---|
-| [`stride`](#stride) | 1.17.3 | Task lifecycle for Stride kanban — claim, complete, create, decompose, with automatic Claude Code hook execution, per-file diff capture (G148/W719 contract), the `## after_goal` hook section, and the four review_queue-scored fields (`acceptance_criteria`, `testing_strategy`, `pitfalls`, `patterns_to_follow`) called out as first-class deliverables across the task-authoring skills |
+| [`stride`](#stride) | 1.18.0 | Task lifecycle for Stride kanban — claim, complete, create, decompose, with automatic Claude Code hook execution, per-file diff capture (G148/W719 contract), the `## after_goal` hook section, the four review_queue-scored fields (`acceptance_criteria`, `testing_strategy`, `pitfalls`, `patterns_to_follow`) called out as first-class deliverables across the task-authoring skills, and (v1.18.0+) project-level checks in `task-reviewer` — reads `CODE-REVIEW.md` at the project root and emits a `project_checks[]` field in the structured reviewer payload (reviewer schema bumped to `1.1`) |
 | [`stride-security-review`](#stride-security-review) | 2.3.0 | AI-powered security review of code changes — seven framework rule packs (Android, Django, Express, iOS, Phoenix, Rails, React/Next.js), CI/CD pack, defense-in-depth pack, with SARIF / CI integration |
 | [`stride-ideation`](#stride-ideation) | 0.7.0 | Turn a fuzzy idea into a committed requirements doc and Stride tasks via two slash commands. v0.7.0: four-layer resilience model on `/stridify` (preflight advisory, `--goal` per-seam partitioning, bounded subagent-dispatch retry, retry-exhaustion fallback) |
 
