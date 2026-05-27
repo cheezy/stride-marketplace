@@ -2,6 +2,21 @@
 
 All notable changes to the Stride marketplace pin set will be documented in this file.
 
+## [1.32.0] - 2026-05-27
+
+### Added
+
+- **`.claude-plugin/marketplace.json`** — Added a fourth plugin entry, `stride-lite` (v0.10.0), so `/plugin install stride-lite@stride-marketplace` becomes available. `stride-lite` is a lightweight companion plugin to Stride that produces Stride-shaped goal and task markdown documents on disk from a free-text prompt plus an optional requirements directory — no API calls, no kanban setup, no auth files. Surface: three slash commands (`/stride-lite:create-goal`, `/stride-lite:create-task`, `/stride-lite:init`), one workflow skill (`stride-lite-workflow` — file-based equivalent of the full Stride plugin's `stride-workflow`, walks a goal directory through an eight-step task lifecycle), and three subagents (`stride-lite:create-decomposer` decomposes a prompt into a goal + child tasks YAML with no API calls; `stride-lite:task-explorer` is read-only codebase enrichment that appends `## Exploration Report`; `stride-lite:task-reviewer` reviews changes against acceptance criteria, pitfalls, patterns, and testing strategy with narrowly-scoped read-only git Bash and appends `## Review Report` with embedded `reviewer_result` JSON, schema `1.1`). v0.9.0+ ships a `hooks/` enforcement layer (`hooks/hooks.json` + `hooks/stride-lite-hook.sh` + `hooks/stride-lite-hook.ps1`) — Claude Code PreToolUse/PostToolUse handlers auto-fire the three `.stride_lite.md` sections at the corresponding workflow intercepts (`## before_task` before the `task-explorer` Agent dispatch; `## after_task` before the `task-reviewer` Agent dispatch — both blocking; `## after_goal` after the goal.md write that appends `## Completion Summary` — advisory). Cross-platform from day one with `.sh` and `.ps1` mirrors and auto-delegation on native Windows. v0.10.0+ adds a terminal PENDING → IMPLEMENTED archive move in `stride-lite-workflow` Step 8: after `## after_goal` fires, the goal directory moves from `docs/implementation/PENDING/<slug>/` to `docs/implementation/IMPLEMENTED/<slug>/` via `git mv` (when tracked, preserves history) or plain `mv` otherwise, with collision suffixing (`-2`, `-3`, … up to a 1000-iteration safety cap), an after-goal-failure no-move guard, non-`/PENDING/` path skip with a stderr warning, and clean exit on filesystem-mv failure. Single-task files under `PENDING/tasks/` are never moved. Marketplace `metadata.version` minor-bumped from `1.31.0` to `1.32.0` to match the new plugin surface.
+- **`README.md`** — Added the `stride-lite` row to the `Available Plugins` table (version `0.10.0`, one-line summary surfacing the v0.9.0 harness hook enforcement and the v0.10.0 terminal archive move) and a new `## stride-lite` per-plugin section beneath the existing three sections, following the same shape (intro paragraph, install command in a fenced bash block, slash-commands list, workflow-skill blurb, agents list, v0.9.0 cross-platform hook enforcement subsection with the trigger table, v0.10.0 terminal-move subsection, and Repository link). The intro paragraph at the top of the README is updated from "Three plugins" to "Four plugins" and the one-line description gains the "file-only lightweight companion" surface.
+
+### Backward compatibility
+
+The three existing plugin pins (`stride` 1.18.0, `stride-security-review` 2.3.0, `stride-ideation` 0.7.0) are unchanged — byte-identical to v1.31.0 in `.claude-plugin/marketplace.json`. Users who do not install `stride-lite` see no behavior change. `stride-lite` is itself a file-only plugin — no Stride server, no `.stride_auth.md`, no `.stride.md` required. The `.stride_lite.md` config file produced by `/stride-lite:init` is optional; both `/stride-lite:create-goal` and `/stride-lite:create-task` work without ever invoking it.
+
+### Source
+
+W918 — adds `stride-lite` to the stride-marketplace catalog so the plugin is installable via `/plugin install stride-lite@stride-marketplace` instead of requiring a manual clone + symlink. Source of truth for the version (`0.10.0`) and description content is `stride-lite/.claude-plugin/plugin.json` + `stride-lite/README.md` + `stride-lite/CHANGELOG.md` (read but not modified by this task).
+
 ## [1.30.4] - 2026-05-25
 
 ### Fixed

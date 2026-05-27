@@ -1,6 +1,6 @@
 # Stride Marketplace
 
-Three plugins for [Claude Code](https://docs.claude.com/en/docs/claude-code) that integrate with the [Stride](https://www.stridelikeaboss.com) task management platform — task lifecycle, AI-powered security review, and structured ideation. Each plugin is independent and can be installed on its own.
+Four plugins for [Claude Code](https://docs.claude.com/en/docs/claude-code) that integrate with the [Stride](https://www.stridelikeaboss.com) task management platform — task lifecycle, AI-powered security review, structured ideation, and a file-only lightweight companion. Each plugin is independent and can be installed on its own.
 
 ## Installation
 
@@ -19,6 +19,7 @@ Then install any subset of the plugins below.
 | [`stride`](#stride) | 1.18.0 | Task lifecycle for Stride kanban — claim, complete, create, decompose, with automatic Claude Code hook execution, per-file diff capture (G148/W719 contract), the `## after_goal` hook section, the four review_queue-scored fields (`acceptance_criteria`, `testing_strategy`, `pitfalls`, `patterns_to_follow`) called out as first-class deliverables across the task-authoring skills, and (v1.18.0+) project-level checks in `task-reviewer` — reads `CODE-REVIEW.md` at the project root and emits a `project_checks[]` field in the structured reviewer payload (reviewer schema bumped to `1.1`) |
 | [`stride-security-review`](#stride-security-review) | 2.3.0 | AI-powered security review of code changes — seven framework rule packs (Android, Django, Express, iOS, Phoenix, Rails, React/Next.js), CI/CD pack, defense-in-depth pack, with SARIF / CI integration |
 | [`stride-ideation`](#stride-ideation) | 0.7.0 | Turn a fuzzy idea into a committed requirements doc and Stride tasks via two slash commands. v0.7.0: four-layer resilience model on `/stridify` (preflight advisory, `--goal` per-seam partitioning, bounded subagent-dispatch retry, retry-exhaustion fallback) |
+| [`stride-lite`](#stride-lite) | 0.10.0 | File-only lightweight companion — writes Stride-shaped goal and task markdown to disk via `/stride-lite:create-goal` / `/stride-lite:create-task` / `/stride-lite:init`. v0.9.0+ harness-enforced `.stride_lite.md` hook auto-fire (PreToolUse/PostToolUse, cross-platform); v0.10.0+ terminal PENDING → IMPLEMENTED archive move in `stride-lite-workflow` |
 
 ---
 
@@ -188,6 +189,54 @@ End-to-end pipeline from requirements doc to created Stride goals. Validates the
 The Stride API POST itself is still not retried — partial-batch idempotency is not guaranteed; the user remains the retry mechanism on a 4xx/5xx.
 
 **Repository:** <https://github.com/cheezy/stride-ideation>
+
+---
+
+## stride-lite
+
+A lightweight companion plugin to Stride — produces Stride-shaped **goal and task markdown documents on disk** from a free-text prompt plus an optional requirements directory. No API calls, no kanban setup, no auth files. Just markdown.
+
+Useful when you want the Stride field discipline (acceptance criteria, key files, pitfalls, testing strategy, dependencies) without committing to the full Stride server workflow. The documents it produces can be reviewed, edited, or later submitted to a real Stride deployment by hand or by tooling — this plugin never does so itself.
+
+**Install:**
+
+```bash
+/plugin install stride-lite@stride-marketplace
+```
+
+**Three slash commands:**
+
+- `/stride-lite:create-goal <prompt>` — decomposes a free-text prompt into a goal plus 1–8 child tasks (capped at 8) and writes them to `docs/implementation/PENDING/<slug>/` (`goal.md` plus `taskN.md` per child).
+- `/stride-lite:create-task <prompt>` — renders a single task markdown file at `<output-dir>/tasks/<slug>.md`. No goal wrapper, no children.
+- `/stride-lite:init` — scaffolds a project-local `.stride_lite.md` with an email field plus three hook sections (`## before_task`, `## after_task`, `## after_goal`). Shape matches the full Stride plugin's `.stride.md` so snippets transfer across plugins.
+
+**Workflow skill:**
+
+- `stride-lite-workflow` — file-based equivalent of the full Stride plugin's `stride-workflow`. Walks a goal directory through an eight-step task lifecycle (select → before_task → explore → implement → after_task → review → review-loop decision → completion + archive), dispatching the two read-only subagents at the right moments. Never POSTs to any API.
+
+**Agents:**
+
+- `stride-lite:create-decomposer` — Decomposes a free-text prompt into a goal + child tasks YAML. No API calls.
+- `stride-lite:task-explorer` — Read-only codebase enrichment (Read / Grep / Glob; no Bash, no WebFetch). Appends `## Exploration Report` to the task file.
+- `stride-lite:task-reviewer` — Reviews changes against acceptance criteria, pitfalls, patterns, and testing strategy with narrowly-scoped read-only git Bash. Appends `## Review Report` with embedded `reviewer_result` JSON (schema `1.1`).
+
+**Cross-platform hook enforcement (v0.9.0+):**
+
+`hooks/hooks.json` registers Claude Code PreToolUse/PostToolUse handlers that auto-fire the three `.stride_lite.md` sections at the corresponding workflow intercepts:
+
+| Trigger | Phase | Section | Blocking? |
+|---|---|---|---|
+| `task-explorer` Agent dispatch | PreToolUse | `## before_task` | yes (exit 2 stops the dispatch) |
+| `task-reviewer` Agent dispatch | PreToolUse | `## after_task` | yes (exit 2 stops the dispatch) |
+| Final-task `goal.md` write with `## Completion Summary` | PostToolUse | `## after_goal` | advisory (PostToolUse cannot roll back the write) |
+
+Cross-platform from day one: `hooks/stride-lite-hook.sh` (POSIX bash, pure-bash JSON parsing, no jq dependency) plus `hooks/stride-lite-hook.ps1` (PowerShell 5.1+, `ConvertFrom-Json` / `ConvertTo-Json`, no module installs). The `.sh` script auto-delegates to `.ps1` on native Windows (OSTYPE unset + COMSPEC set).
+
+**Terminal PENDING → IMPLEMENTED archive move (v0.10.0+):**
+
+After `## after_goal` fires on the final task of a goal, `stride-lite-workflow` Step 8 moves the goal directory from `docs/implementation/PENDING/<slug>/` to `docs/implementation/IMPLEMENTED/<slug>/`. Prefers `git mv` when the directory is git-tracked (preserves rename history); falls back to plain `mv` otherwise. Collision suffixing on the target with `-2` / `-3` / … up to a 1000-iteration safety cap — the archive never overwrites prior entries. After-goal-failure guard (a structured `"status": "failed"` JSON from the harness skips the move so the user can inspect and re-trigger). Non-`/PENDING/` paths (custom `--output-dir`) are left where they are with a stderr warning. Filesystem-mv failures log and exit cleanly — the workflow does not fail because of an archive-move failure. Single-task files under `PENDING/tasks/` are NEVER moved; only goal directories.
+
+**Repository:** <https://github.com/cheezy/stride-lite>
 
 ---
 
