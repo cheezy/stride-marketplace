@@ -2,6 +2,17 @@
 
 All notable changes to the Stride marketplace pin set will be documented in this file.
 
+## [1.33.0] - 2026-06-05
+
+### Updated
+
+- **`.claude-plugin/marketplace.json`** — Bumped the `stride` plugin pin from `1.18.0` to **`1.19.0`** so `/plugin update stride@stride-marketplace` pulls the new release. v1.19.0 (1) adds three per-section verdict objects to the `agents/task-reviewer.md` reviewer schema — `testing_strategy` / `patterns` / `pitfalls`, each `{ "status": "passed" | "failed" | "not_assessed" }`, rendered as section tiles in the Kanban review queue, with a consistency rule tying every `"failed"` verdict to a matching-category `issues[]` entry — and bumps `schema_version` from `"1.1"` to `"1.2"`; (2) rewrites the `skills/stride-completing-tasks/SKILL.md` completion contract to persist the reviewer agent's full structured JSON block verbatim as `reviewer_result` (merged with the legacy summary fields) instead of the thin issues-found envelope that stripped the issues, acceptance verdicts, and code-review checks the review queue renders; and (3) fixes the `after_doing` hook (`hooks/stride-hook.sh` + `hooks/stride-hook.ps1`) so the `/changed_files` diff PUT resolves its URL and bearer token from `$PROJECT_DIR/.stride_auth.md` (production `**API Token:**`, never `**Local API Token:**`) with the `$COMMAND` literal extraction as fallback — fixing the empty `changed_files` that occurred on every completion whose curl used `$STRIDE_API_URL` / `$STRIDE_API_TOKEN` shell variables. Forward-compatible additive change; older orchestrators emitting only the legacy envelope still validate. The stride plugin description in the marketplace entry gains a `v1.19.0+:` paragraph. Marketplace `metadata.version` minor-bumped from `1.32.0` to `1.33.0`.
+- **`README.md`** — Updated the `stride` row in the `Available Plugins` table to version `1.19.0` and refreshed its one-line summary to surface the section verdicts, the rich-block persistence, and the changed_files hook fix.
+
+### Backward compatibility
+
+Pin-only change for the `stride` plugin; the other three plugin pins (`stride-security-review` `2.3.0`, `stride-ideation` `0.7.0`, `stride-lite` `0.10.0`) are unchanged. The stride v1.19.0 wire changes are additive and forward-compatible (see the stride plugin CHANGELOG `1.19.0`).
+
 ## [1.32.0] - 2026-05-27
 
 ### Added
