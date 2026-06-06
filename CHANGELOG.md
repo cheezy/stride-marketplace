@@ -2,6 +2,17 @@
 
 All notable changes to the Stride marketplace pin set will be documented in this file.
 
+## [1.35.0] - 2026-06-06
+
+### Updated
+
+- **`.claude-plugin/marketplace.json`** — Bumped the `stride` plugin pin from `1.20.0` to **`1.21.0`** so `/plugin update stride@stride-marketplace` pulls the new release. v1.21.0 elevates `security_considerations` to a first-class, review_queue-scored field at parity with `testing_strategy`: the three task-authoring skills (`stride-creating-tasks`, `stride-enriching-tasks`, `stride-creating-goals`) name it as the 5th scored field (callouts four → five) with an array-of-strings shape; the `task-enricher` and `task-decomposer` agents derive and emit it; `agents/task-reviewer.md` gains a **Security Considerations Alignment** review step plus a `security_considerations` `{ "status": "passed" | "failed" | "not_assessed" }` section-verdict object that confirms the considerations were actually implemented, the `issues[]` `category` enum gains `"security"`, and `schema_version` bumps `"1.2"` → `"1.3"`; and `skills/stride-completing-tasks/SKILL.md` + `skills/stride-workflow/SKILL.md` carry the verdict verbatim into `reviewer_result`. The stride plugin description in the marketplace entry gains a `v1.21.0+:` paragraph. Marketplace `metadata.version` minor-bumped from `1.34.0` to `1.35.0`.
+- **`README.md`** — Updated the `stride` row in the `Available Plugins` table to version `1.21.0` and refreshed its one-line summary to surface the `security_considerations` elevation, the `task-reviewer` Security Considerations Alignment step, the section verdict, and the `schema_version` `1.3` bump.
+
+### Backward compatibility
+
+Pin-only change for the `stride` plugin; the other three plugin pins (`stride-security-review` `2.3.0`, `stride-ideation` `0.7.0`, `stride-lite` `0.10.0`) are unchanged. The stride v1.21.0 wire changes are additive and forward-compatible (see the stride plugin CHANGELOG `1.21.0`) — the Kanban server stores `reviewer_result` as `:jsonb` and tolerates the new `security_considerations` key; reviewers on an older `schema_version` omit it. The Kanban-server UI half (rendering the security-considerations review result on the Review Queue) ships independently.
+
 ## [1.33.0] - 2026-06-05
 
 ### Updated
