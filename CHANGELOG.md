@@ -2,6 +2,17 @@
 
 All notable changes to the Stride marketplace pin set will be documented in this file.
 
+## [1.36.0] - 2026-06-07
+
+### Updated
+
+- **`.claude-plugin/marketplace.json`** — Bumped the `stride` plugin pin from `1.21.0` to **`1.22.0`** so `/plugin update stride@stride-marketplace` pulls the new release. v1.22.0 changes the `after_doing` hook (`hooks/stride-hook.sh` + `hooks/stride-hook.ps1`) to upload the per-file diff snapshot to `/api/tasks/:id/changed_files` as a **transport-encoded envelope** — `{"changed_files":{"encoding":"base64","data":"<single-line-base64>"}}` — instead of the raw `{"changed_files":[...]}` array, so an edge request filter (WAF) in front of the Stride server cannot misread a dense code diff as an attack payload and silently drop the upload (which left `changed_files` empty in the review queue); the server decodes the base64 back to the identical list. The hook falls back to the raw array shape when `base64` is unavailable (the object wrapper is preserved on both paths so the value never lands at `params['_json']` as NULL), and a non-2xx upload response is now surfaced as a stderr warning instead of being discarded (non-fatal to completion; the bearer token is never logged). The stride plugin description in the marketplace entry gains a `v1.22.0+:` paragraph. Marketplace `metadata.version` minor-bumped from `1.35.0` to `1.36.0`.
+- **`README.md`** — Updated the `stride` row in the `Available Plugins` table to version `1.22.0` and added a `v1.22.0+` paragraph to the `## stride` section documenting the transport-encoded `changed_files` upload, the raw-array fallback, and the non-2xx stderr warning.
+
+### Backward compatibility
+
+Pin-only change for the `stride` plugin; the other plugin pins (`stride-security-review` `2.3.0`, `stride-ideation` `0.7.0`, `stride-lite` `0.10.0`) are unchanged. The stride v1.22.0 wire change is additive (see the stride plugin CHANGELOG `1.22.0`) but requires the Kanban server to accept the `base64` / `gzip+base64` envelope on `/changed_files`, which ships independently in the kanban repo; the raw-array fallback path remains byte-compatible with the prior hook where `base64` is unavailable.
+
 ## [1.35.0] - 2026-06-06
 
 ### Updated
