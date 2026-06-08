@@ -2,6 +2,17 @@
 
 All notable changes to the Stride marketplace pin set will be documented in this file.
 
+## [1.38.0] - 2026-06-08
+
+### Updated
+
+- **`.claude-plugin/marketplace.json`** — Bumped the `stride` plugin pin from `1.22.1` to **`1.23.0`** so `/plugin update stride@stride-marketplace` pulls the new release. v1.23.0 adds a third `project_checks[]` per-entry `status` value, **`not_applicable`** (alongside `met`/`not_met`), to `agents/task-reviewer.md` and requires the reviewer to emit one entry for **every** top-level `CODE-REVIEW.md` bullet — bullets with no bearing on the diff are marked `not_applicable` with a one-line reason rather than omitted, so the Kanban review queue's "Code review" panel renders the full checklist instead of a partial one. `not_applicable` is approval-neutral (no paired `issues[]` entry, never triggers `changes_requested`); `schema_version` bumps `"1.3"` → `"1.4"`. The stride plugin description in the marketplace entry gains a `v1.23.0+:` paragraph. Marketplace `metadata.version` minor-bumped from `1.37.0` to `1.38.0`.
+- **`README.md`** — Updated the `stride` row in the `Available Plugins` table to version `1.23.0` and appended a `v1.23.0+` clause surfacing the `not_applicable` project-check status, the full-checklist emission requirement, and the `schema_version` `1.4` bump.
+
+### Backward compatibility
+
+Pin-only change for the `stride` plugin; the other three plugin pins (`stride-security-review` `2.3.0`, `stride-ideation` `0.7.0`, `stride-lite` `0.10.0`) are unchanged. The stride v1.23.0 wire change is additive and forward-compatible (see the stride plugin CHANGELOG `1.23.0`) — the Kanban server stores `reviewer_result` as `:jsonb` and persists it verbatim, so the new `not_applicable` status value flows through untouched; reviewers on an older `schema_version` omit it. The Kanban-server UI half (the review-queue "N/A" pill) ships independently.
+
 ## [1.36.0] - 2026-06-07
 
 ### Updated
