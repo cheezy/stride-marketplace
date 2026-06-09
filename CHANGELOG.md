@@ -2,6 +2,17 @@
 
 All notable changes to the Stride marketplace pin set will be documented in this file.
 
+## [1.39.0] - 2026-06-09
+
+### Updated
+
+- **`.claude-plugin/marketplace.json`** — Bumped the `stride` plugin pin from `1.23.0` to **`1.24.0`** so `/plugin update stride@stride-marketplace` pulls the new release. v1.24.0 makes **every part of a dispatched review report mandatory on every task completion — NO EXCEPTIONS (goal G222)**: all review information the task supplies (`security_considerations`, `testing_strategy`, `patterns_to_follow`, `pitfalls`, `acceptance_criteria`) must be passed to the reviewer, and the reviewer's entire structured output (every project check and every section verdict) must reach the server intact. It is the plugin-side source fix for the recurring defect where a task's security considerations came back **`not_assessed`** and the project-checks list was silently **truncated** (3 of 26 reached the server): `skills/stride-workflow/SKILL.md` (W1072) now passes every review field the task supplies to the reviewer (it previously listed only four, omitting `security_considerations`); `agents/task-reviewer.md` (W1073/W1076) reserves `not_assessed` strictly for a section the task itself left empty and single-sources its input contract; the `reviewer_result` passthrough (W1074) is now a mechanical whole-object copy with a count-checked self-check; and `skills/stride-completing-tasks/SKILL.md` (W1075) adds a mandatory pre-submission self-check hard gate. The stride plugin description in the marketplace entry gains a `v1.24.0+:` paragraph. Marketplace `metadata.version` minor-bumped from `1.38.0` to `1.39.0`.
+- **`README.md`** — Updated the `stride` row in the `Available Plugins` table to version `1.24.0` and appended a `v1.24.0+` clause; added a `v1.24.0+` paragraph to the `## stride` section documenting the complete-delivery (NO EXCEPTIONS) review-report rule, the count-checked whole-object `reviewer_result` passthrough, and the pre-submission self-check hard gate.
+
+### Backward compatibility
+
+Pin-only change for the `stride` plugin; the other three plugin pins (`stride-security-review` `2.3.0`, `stride-ideation` `0.7.0`, `stride-lite` `0.10.0`) are unchanged. The stride v1.24.0 change is documentation/agent-prompt only — no wire-shape, hook, `.stride.md`, or `.stride_auth.md` change (see the stride plugin CHANGELOG `1.24.0`); it makes the plugin always emit the complete `reviewer_result` the schema already defines (stored as `:jsonb` and persisted verbatim since v1.22.1). The Kanban server independently hard-rejects an incomplete or task-inconsistent report (goal G221), so the two halves enforce completeness from both ends.
+
 ## [1.38.0] - 2026-06-08
 
 ### Updated
