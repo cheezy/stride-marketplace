@@ -2,6 +2,17 @@
 
 All notable changes to the Stride marketplace pin set will be documented in this file.
 
+## [1.41.0] - 2026-06-13
+
+### Updated
+
+- **`.claude-plugin/marketplace.json`** — Bumped the `stride` plugin pin from `1.25.0` to **`1.28.0`** so `/plugin update stride@stride-marketplace` pulls the new release. v1.28.0 makes the **claim-time `TASK_BASE_REF` always refreshed (G224)**: the PostToolUse hook records the HEAD commit at claim time in `.stride-env-cache` and the `after_doing` flow diffs against it, but the cache was only written when the claim response parsed out of `tool_response.stdout` — an oversized claim response is persisted to a file by Claude Code (only a `Full output saved to:` notice reaches stdout), so the parse failed, the write was skipped, and a stale base ref from a previous claim survived, making `changed_files` span unrelated commits (D60 showed 27 files for a 3-file task). `hooks/stride-hook.sh` (W1086) adds a persisted-output file fallback (validated regular file, parsed with `jq` only, never sourced/eval'd) and makes the base-ref refresh unconditional on every claim (rewrite `TASK_BASE_REF` to current HEAD and clear the stale snapshot even when no JSON parses, preserving `TASK_` identity lines); `hooks/stride-hook.ps1` (W1087) ports the same for Windows parity (the ps1 hook previously never wrote `TASK_BASE_REF`) and fixes a pre-existing `Set-StrictMode` property-access hazard. Bash Test Group 14 and PowerShell Test Group 10 mirror test-for-test (bash 237, PowerShell 172 green). The pin also carries the previously-unreleased plugin v1.26.0 (D65/D66) and v1.27.0 (D67) changes. The stride plugin description in the marketplace entry gains a `v1.28.0+` clause. Marketplace `metadata.version` minor-bumped from `1.40.0` to `1.41.0`.
+- **`README.md`** — Updated the `stride` row in the `Available Plugins` table to version `1.28.0` and appended a `v1.28.0+` clause; added a `v1.28.0+` paragraph to the `## stride` section documenting the persisted-output fallback, the unconditional claim-time base-ref refresh, the PowerShell parity port, and the StrictMode fix.
+
+### Backward compatibility
+
+Pin-only change for the `stride` plugin; the other three plugin pins (`stride-security-review` `2.3.0`, `stride-ideation` `0.7.0`, `stride-lite` `0.10.0`) are unchanged. The stride v1.28.0 change is hook-script only — no wire-shape, hook-timeout, `.stride.md`, or `.stride_auth.md` change (see the stride plugin CHANGELOG `1.28.0`); a claim whose response parses inline behaves exactly as before, the new behavior only adds recovery paths for responses that previously left the cache stale.
+
 ## [1.39.0] - 2026-06-09
 
 ### Updated
