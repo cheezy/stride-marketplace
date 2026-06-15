@@ -2,6 +2,17 @@
 
 All notable changes to the Stride marketplace pin set will be documented in this file.
 
+## [1.42.0] - 2026-06-15
+
+### Updated
+
+- **`.claude-plugin/marketplace.json`** — Bumped the `stride-ideation` plugin pin from `0.7.0` to **`0.8.0`** so `/plugin update stride-ideation@stride-marketplace` pulls the new release. v0.8.0 turns `/stride-ideation:ideate` into a guided, recoverable, human-in-control session with six additive features — (1) a display-only per-round section-completeness recap (the seven gated sections shown `solid`/`thin`/`empty` before every round; never changes the gate, round order, or `<=4`-question budget), (2) an "I'm not sure — propose candidates" uncertainty path on every gated-section and forcing question (proposes 2–4 topic-tailored candidates with rationales; a candidate never satisfies the gate until the human confirms it), (3) a profile recommendation before the rounds when `--profile` is omitted (recommended-first, lean default; explicit `--profile` skips it), (4) a `--input <path>` brain-dump seed read read-only to pre-fill draft sections (distinct from and composable with `--continue`; the file is never modified, moved, or committed), (5) intra-session draft autosave/resume via a new pure-shell `lib/draft.sh` that persists the in-progress draft after every round to a gitignored `.stride/` scratch file and offers resume-or-fresh for the same slug, deleting the scratch after a successful commit (never holds the token), and (6) advisory `requirements-reviewer` findings surfaced as a multi-select human decision with an explicit "Address none — write as-is" choice (at most one refinement round; reviewer never blocks the write). `/stride-ideation:stridify` gains a **preview-and-approval gate** before the POST (renders the decomposed goal/task tree + cross-goal claim order and requires explicit approval; decline stops cleanly with the committed batch JSON intact and no POST) plus a `--yes` / `--auto-approve` bypass for scripted callers. Test coverage grows from 109 to 155 assertions across 11 suites (3 new suites: `test-stridify-preview`, `test-ideate-input`, `test-draft`). The `stride-ideation` marketplace entry description gains a `v0.8.0` clause. Marketplace `metadata.version` minor-bumped from `1.41.0` to `1.42.0`.
+- **`README.md`** — Updated the `stride-ideation` row in the `Available Plugins` table to version `0.8.0` with a `v0.8.0` summary; added a `v0.8.0+` paragraph to the `## stride-ideation` section documenting the six `/ideate` session features and the `/stridify` preview-and-approval gate with `--yes` bypass.
+
+### Backward compatibility
+
+Pin-only change for the `stride-ideation` plugin; the other three plugin pins (`stride` `1.28.0`, `stride-security-review` `2.3.0`, `stride-lite` `0.10.0`) are unchanged. The stride-ideation v0.8.0 changes are command/skill-contract + pure-shell-helper additions (see the stride-ideation plugin CHANGELOG `0.8.0`) — no `.stride.md`, `.stride_auth.md`, or Stride API wire-shape change. A flag-free or `--profile=lean` `/ideate` run is byte-for-byte compatible on the happy path; the one automation-affecting change is that a non-interactive `/stride-ideation:stridify` now pauses for human approval unless `--yes` / `--auto-approve` is passed, and `.stride/` is a new gitignored draft-autosave directory.
+
 ## [1.41.0] - 2026-06-13
 
 ### Updated
