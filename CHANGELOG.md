@@ -2,6 +2,17 @@
 
 All notable changes to the Stride marketplace pin set will be documented in this file.
 
+## [1.43.0] - 2026-06-19
+
+### Updated
+
+- **`.claude-plugin/marketplace.json`** — Bumped the `stride` plugin pin from `1.28.0` to **`1.29.0`** so `/plugin update stride@stride-marketplace` pulls the new release. v1.29.0 documents the **`technical_details` task field** across the plugin (G243): an optional, free-form JSON object (arbitrary keys/values) a task may carry for any additional technical context that does not fit the structured fields — data shapes, gotchas, key decisions, reference links. Unlike `testing_strategy` it has no fixed keys, and it is **not** one of the five review_queue-scored fields (`acceptance_criteria`, `testing_strategy`, `security_considerations`, `pitfalls`, `patterns_to_follow`), so a blank `{}` is never a scoring gap. The creation contracts (`stride-creating-tasks` W1179, `stride-creating-goals` W1179), the enrichment/decomposition guidance (`task-enricher` + `stride-enriching-tasks` W1180, `task-decomposer` W1180), and the workflow/exploration references (`stride-workflow` Step 1 W1181, `task-explorer` W1181) all describe the field consistently — optional, free-form, never fabricated, with a no-secrets reminder. Marketplace `metadata.version` minor-bumped from `1.42.0` to `1.43.0`.
+- **`README.md`** — Updated the `stride` row in the `Available Plugins` table to version `1.29.0` with a `v1.29.0+` clause; added a `v1.29.0+` paragraph to the `## stride` section documenting the new `technical_details` field.
+
+### Backward compatibility
+
+Pin-only change for the `stride` plugin; the other three plugin pins (`stride-security-review` `2.3.0`, `stride-ideation` `0.8.0`, `stride-lite` `0.10.0`) are unchanged. The stride v1.29.0 change is documentation-only (see the stride plugin CHANGELOG `1.29.0`) — no `.stride.md`, `.stride_auth.md`, hook, or Stride API wire-shape change; `technical_details` is optional everywhere and never added to any scored-field set, so tasks that omit it behave exactly as before.
+
 ## [1.42.0] - 2026-06-15
 
 ### Updated
