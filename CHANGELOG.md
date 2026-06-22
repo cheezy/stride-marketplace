@@ -2,6 +2,17 @@
 
 All notable changes to the Stride marketplace pin set will be documented in this file.
 
+## [1.45.0] - 2026-06-22
+
+### Updated
+
+- **`.claude-plugin/marketplace.json`** — Bumped the `stride-security-review` plugin pin from `2.3.0` to **`2.4.0`** so `/plugin update stride-security-review@stride-marketplace` pulls the new release. v2.4.0 is a test-coverage, tooling, and documentation-accuracy release (the analysis rules are unchanged): golden-file tests for the deterministic SARIF/dedup/fingerprint/fail-on transforms; positive-control fixtures for the four previously-uncovered CI/CD platforms (Azure Pipelines, Drone, Jenkins, Tekton) and the two missing supply-chain sub-rules (lockfile-drift, typosquat), taking the eval suite from 64 to **70 fixtures**; a fixture/`EXPECTED.md` parity guard wired into CI; per-finding schema validation in the eval runner; the SARIF `tool.driver.version` drift fix (now tracks `plugin.json`); and several documentation-drift corrections (README eval count, the `EXPECTED.md` full-scan scenario, the CHANGELOG footer). The entry description's fixture count was updated `64` → `70`. Marketplace `metadata.version` bumped from `1.44.0` to `1.45.0`.
+- **`README.md`** — Updated the `stride-security-review` row in the `Available Plugins` table to version `2.4.0` with a `v2.4.0` clause noting the 70-fixture coverage and golden-file transform tests.
+
+### Backward compatibility
+
+Pin-only change for `stride-security-review`; the other three plugin pins (`stride` `1.30.0`, `stride-ideation` `0.8.0`, `stride-lite` `0.10.0`) are unchanged. The stride-security-review v2.4.0 change adds test coverage, internal tooling, and documentation fixes plus the SARIF driver-version metadata fix — no change to the analysis rules, the slash-command flags, or the JSON/SARIF wire shape beyond `driver.version` now reflecting the real plugin version. Repos that consumed v2.3.0 output continue to parse unchanged.
+
 ## [1.43.0] - 2026-06-19
 
 ### Updated
