@@ -1,6 +1,6 @@
 # Stride Marketplace
 
-Four plugins for [Claude Code](https://docs.claude.com/en/docs/claude-code) that integrate with the [Stride](https://www.stridelikeaboss.com) task management platform — task lifecycle, AI-powered security review, structured ideation, and a file-only lightweight companion. Each plugin is independent and can be installed on its own.
+Five plugins for [Claude Code](https://docs.claude.com/en/docs/claude-code) — four that integrate with the [Stride](https://www.stridelikeaboss.com) task management platform (task lifecycle, AI-powered security review, structured ideation, and a file-only lightweight companion) plus a LaunchDarkly feature-flag codegen plugin. Each plugin is independent and can be installed on its own.
 
 ## Installation
 
@@ -20,6 +20,7 @@ Then install any subset of the plugins below.
 | [`stride-security-review`](#stride-security-review) | 2.4.0 | AI-powered security review of code changes — seven framework rule packs (Android, Django, Express, iOS, Phoenix, Rails, React/Next.js), CI/CD pack, defense-in-depth pack, with SARIF / CI integration. v2.4.0: 70-fixture eval coverage (Azure/Drone/Jenkins/Tekton + lockfile-drift/typosquat) and golden-file transform tests |
 | [`stride-ideation`](#stride-ideation) | 0.8.0 | Turn a fuzzy idea into a committed requirements doc and Stride tasks via two slash commands. v0.7.0: four-layer resilience model on `/stridify`. v0.8.0: a guided, human-in-control `/ideate` session (per-round completeness recap, "I'm not sure — propose candidates" path, profile recommendation, `--input` brain-dump seed, intra-session draft autosave/resume, reviewer-findings decision) plus a `/stridify` preview-and-approval gate with `--yes` bypass |
 | [`stride-lite`](#stride-lite) | 0.10.0 | File-only lightweight companion — writes Stride-shaped goal and task markdown to disk via `/stride-lite:create-goal` / `/stride-lite:create-task` / `/stride-lite:init`. v0.9.0+ harness-enforced `.stride_lite.md` hook auto-fire (PreToolUse/PostToolUse, cross-platform); v0.10.0+ terminal PENDING → IMPLEMENTED archive move in `stride-lite-workflow` |
+| [`launchdarkly`](#launchdarkly) | 0.2.0 | Generate correct, testable, and removable LaunchDarkly feature-flag code — Java server SDK plus the TypeScript SDKs (Node server, client-side JS, React) with skills, scaffolding and flag-removal commands, and an anti-pattern review agent |
 
 ---
 
@@ -266,6 +267,20 @@ Cross-platform from day one: `hooks/stride-lite-hook.sh` (POSIX bash, pure-bash 
 After `## after_goal` fires on the final task of a goal, `stride-lite-workflow` Step 8 moves the goal directory from `docs/implementation/PENDING/<slug>/` to `docs/implementation/IMPLEMENTED/<slug>/`. Prefers `git mv` when the directory is git-tracked (preserves rename history); falls back to plain `mv` otherwise. Collision suffixing on the target with `-2` / `-3` / … up to a 1000-iteration safety cap — the archive never overwrites prior entries. After-goal-failure guard (a structured `"status": "failed"` JSON from the harness skips the move so the user can inspect and re-trigger). Non-`/PENDING/` paths (custom `--output-dir`) are left where they are with a stderr warning. Filesystem-mv failures log and exit cleanly — the workflow does not fail because of an archive-move failure. Single-task files under `PENDING/tasks/` are NEVER moved; only goal directories.
 
 **Repository:** <https://github.com/cheezy/stride-lite>
+
+---
+
+## launchdarkly
+
+Generate correct, testable, and removable LaunchDarkly feature-flag code from Claude Code — covers the Java server SDK and the TypeScript SDKs (Node server, client-side JS, React) with skills, scaffolding and flag-removal commands, and an anti-pattern review agent.
+
+**Install:**
+
+```bash
+/plugin install launchdarkly@stride-marketplace
+```
+
+**Repository:** <https://github.com/cheezy/launchdarkly>
 
 ---
 
