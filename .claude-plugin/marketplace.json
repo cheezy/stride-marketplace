@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Stride task management skills for AI agents",
-    "version": "1.47.0"
+    "version": "1.48.0"
   },
   "plugins": [
     {
@@ -36,7 +36,7 @@
         "url": "https://github.com/cheezy/stride-ideation.git"
       },
       "description": "Turn a fuzzy idea into shipped Stride tasks via two slash commands — /ideate drives an interactive, profile-aware question loop that hard-gates seven requirements sections into a committed markdown doc, and /stridify decomposes that doc into Stride goals and tasks via the batch API.",
-      "version": "0.9.0",
+      "version": "0.10.0",
       "strict": true
     },
     {
