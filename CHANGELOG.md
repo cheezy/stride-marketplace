@@ -2,6 +2,17 @@
 
 All notable changes to the Stride marketplace pin set will be documented in this file.
 
+## [1.49.0] - 2026-06-29
+
+### Updated
+
+- **`.claude-plugin/marketplace.json`** — Bumped the `stride` plugin pin from `1.30.1` to **`1.31.0`** so `/plugin update stride@stride-marketplace` pulls the new release. v1.31.0 gives the `/stride:create-tasks` and `/stride:create-goals` commands an explicit **terminal state** — after creating, the `stride-workflow` orchestrator reports the new identifiers, clears the activation marker, and stops instead of falling through into the build loop and auto-claiming/building the just-created task — plus a **Backlog claim-fail guard** so a failed claim never falls back to building outside the lifecycle (G284 / W1400). Marketplace `metadata.version` bumped from `1.48.0` to `1.49.0`.
+- **`README.md`** — Updated the `stride` row in the `Available Plugins` table to version `1.31.0` with a `(v1.31.0+)` clause noting the create terminal-state and Backlog claim-fail guard.
+
+### Backward compatibility
+
+Pin-only change for `stride`; the other four plugin pins (`stride-security-review` `2.4.1`, `stride-ideation` `0.10.0`, `stride-lite` `0.10.0`, `launchdarkly` `0.2.0`) are unchanged. The stride v1.31.0 change is documentation/skill-text only — no wire-shape, hook, or auth changes; the build loop is unchanged.
+
 ## [1.45.0] - 2026-06-22
 
 ### Updated
