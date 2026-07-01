@@ -2,6 +2,17 @@
 
 All notable changes to the Stride marketplace pin set will be documented in this file.
 
+## [1.50.0] - 2026-07-01
+
+### Updated
+
+- **`.claude-plugin/marketplace.json`** — Bumped the `stride` plugin pin from `1.31.0` to **`1.32.0`** so `/plugin update stride@stride-marketplace` pulls the new release. v1.32.0 adds an **API Notes & Limitations** section to the `stride-workflow` orchestrator skill documenting two recurring API gotchas: tasks cannot be reparented (`parent_id` is creation-only) and there is no DELETE endpoint — moving/removing a task is a human board-UI action, never a recreate-as-supersede workaround; and raw HTTP calls must use curl or a curl/browser-like User-Agent because the hosted API edge returns `403` `error code: 1010` to default library User-Agents (G286 / W1416). Marketplace `metadata.version` bumped from `1.49.0` to `1.50.0`.
+- **`README.md`** — Updated the `stride` row in the `Available Plugins` table to version `1.32.0` with a `(v1.32.0+)` clause noting the API Notes & Limitations documentation.
+
+### Backward compatibility
+
+Pin-only change for `stride`; the other four plugin pins (`stride-security-review` `2.4.1`, `stride-ideation` `0.10.0`, `stride-lite` `0.10.0`, `launchdarkly` `0.2.0`) are unchanged. The stride v1.32.0 change is documentation/skill-text only — no wire-shape, hook, or auth changes.
+
 ## [1.49.0] - 2026-06-29
 
 ### Updated
