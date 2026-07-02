@@ -2,6 +2,17 @@
 
 All notable changes to the Stride marketplace pin set will be documented in this file.
 
+## [1.51.0] - 2026-07-02
+
+### Updated
+
+- **`.claude-plugin/marketplace.json`** — Bumped the `stride` plugin pin from `1.32.0` to **`1.33.0`** so `/plugin update stride@stride-marketplace` pulls the new release. v1.33.0 ships hook executor hardening in both `stride-hook.sh` and `stride-hook.ps1`: per-hook timeouts enforced per the documented budgets (section-spanning, server-supplied values take precedence, process-group kills, exit-124 reporting, macOS watchdog fallback), server-supplied hook env forwarding so `## after_goal` receives the `GOAL_*` vars, real `duration_ms` telemetry in the hook stdout JSON (`duration_seconds` deprecated, kept one release), quote-aware backslash line continuation in the `.stride.md` parser (the docs' canonical multi-line `gh pr create` example now runs as one command), and a claim-time dirty-baseline guard so pre-existing unrelated working-tree edits never pollute `changed_files` — with the hook configuration and auth dot-files hard-excluded by name from every snapshot and upload (the auth file can never be uploaded). Plus a documentation accuracy sweep: stale five-field completion claims replaced with pointers to the Completion Request Field Reference table, `hook-diagnostician` gains `after_goal` coverage, workflow step numbering is contiguous again (Steps 6–9 → 5–8), and the capture docs now match the executor (auth-file-first credentials, base64 transport envelope, nested-repo limitation) (G287 / W1449–W1458). **The five port plugins (`stride-codex`, `stride-gemini`, `stride-opencode`, `stride-copilot`, `stride-pi`) do not yet mirror these changes — port parity is follow-up work.** Marketplace `metadata.version` bumped from `1.50.0` to `1.51.0`.
+- **`README.md`** — Updated the `stride` row in the `Available Plugins` table to version `1.33.0` with a `(v1.33.0+)` clause noting the executor hardening and accuracy sweep.
+
+### Backward compatibility
+
+Pin-only change for `stride`; the other four plugin pins (`stride-security-review` `2.4.1`, `stride-ideation` `0.10.0`, `stride-lite` `0.10.0`, `launchdarkly` `0.2.0`) are unchanged. stride v1.33.0 keeps `.stride.md` files working unmodified, with two behavioral notes: hook commands now run in fresh shells per logical line (a `cd` on one line no longer affects the next), and hook sections exceeding their documented budget now fail with exit 124 instead of silently consuming the 300s harness ceiling.
+
 ## [1.50.0] - 2026-07-01
 
 ### Updated
