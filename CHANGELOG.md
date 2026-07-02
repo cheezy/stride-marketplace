@@ -2,6 +2,17 @@
 
 All notable changes to the Stride marketplace pin set will be documented in this file.
 
+## [1.54.0] - 2026-07-02
+
+### Updated
+
+- **`.claude-plugin/marketplace.json`** — Bumped the `stride-lite` plugin pin from `0.10.0` to **`0.11.0`** so `/plugin update stride-lite@stride-marketplace` pulls the new release. v0.11.0 is an accuracy-and-installer release (W1477–W1483). The headline fix: **copy installs now ship the hook enforcement layer** — `install.sh` previously copied every plugin directory except `hooks/`, so script-based installs silently lacked the documented PreToolUse/PostToolUse auto-fire entirely; pre-0.11.0 copy installs should re-run `./install.sh --force`. The installer now copies `hooks/` with the executable bit preserved, reports it in the install summary, and fails loudly before any success banner if `hooks.json` does not land. Alongside it: the init command/skill, the workflow walkthrough, and the scaffolded `.stride_lite.md` template all teach the v0.9.0 harness-executes model (the stale "static configuration" and workflow-skill-executes claims are gone, and the walkthrough no longer instructs the double execution the harness migration removed — its Step 8 now ends with the PENDING→IMPLEMENTED archive move); phantom `/stride-lite:ideate`/`/stride-lite:decompose` references are purged and the create-decomposer's unjustified `Read, Grep` grant removed after verifying both dispatch sites pass requirements text inline; the README's version label, command count, and step-count claims are corrected with drift-resistant wording; the smoke suite grows from 24 to 43 assertions with machine-enforced init-template parity and nine hook-routing payload fixtures; and the shipped init-command goal artifact is archived per the plugin's own convention. The entry description gained a `v0.11.0+:` clause in its existing inline style. Marketplace `metadata.version` bumped from `1.53.0` to `1.54.0`.
+- **`README.md`** — Updated the `stride-lite` row in the `Available Plugins` table to version `0.11.0` with a `v0.11.0+` clause noting the installer enforcement-layer fix (and the reinstall guidance), the harness-executes wording, and the 43-assertion smoke suite.
+
+### Backward compatibility
+
+Pin-only change for `stride-lite`; the other plugin pins (`stride` `1.33.0`, `stride-ideation` `0.11.0`, `stride-security-review` `2.4.2`, `launchdarkly` `0.2.0`) are unchanged. stride-lite v0.11.0 changes installer behavior only additively (the copy set gains `hooks/`; symlink installs are untouched) and its remaining changes are documentation, tests, and one archival move — no command surface, output schema, or hook-script behavior changed. Users who installed via `./install.sh` before 0.11.0 should re-run it with `--force` to gain the enforcement layer they were missing.
+
 ## [1.53.0] - 2026-07-02
 
 ### Updated
