@@ -2,6 +2,17 @@
 
 All notable changes to the Stride marketplace pin set will be documented in this file.
 
+## [1.53.0] - 2026-07-02
+
+### Updated
+
+- **`.claude-plugin/marketplace.json`** — Bumped the `stride-security-review` plugin pin from `2.4.1` to **`2.4.2`** so `/plugin update stride-security-review@stride-marketplace` pulls the new release. v2.4.2 is a documentation-accuracy release (W1469–W1475; the analysis rules, flags, and wire schema are unchanged): the skill and command docs are unified on the fifteen-value `vulnerability_class` contract (supply chain restored to the universal list, the five MAESTRO-derived agentic classes named, the enum owned by the agent prompt and referenced — not restated — elsewhere); the framework-pack count now matches the seven-pack inventory with Express no longer offered as future work; the README CI gating snippet quotes the shipped workflow's fail-closed `-ne 0` gate verbatim instead of the fail-open `-eq 1` it documented (anyone who copied the old snippet had a gate that passed when the reviewer crashed); the `--rci` out-of-range contradiction is resolved with unambiguous consume-and-clamp semantics and a worked five-row input table; the skill's Customization section names all ten implemented flags with the command as the single semantics owner; the README eval-count annotation is genuinely count-agnostic with a scoped drift guard added to `scripts/check_fixtures.sh` (rides the existing CI step); and the CHANGELOG footer link set is complete through the current release with a release-ritual comment. Marketplace `metadata.version` bumped from `1.52.0` to `1.53.0`.
+- **`README.md`** — Updated the `stride-security-review` row in the `Available Plugins` table to version `2.4.2` with a `v2.4.2:` clause noting the documentation-accuracy fixes and the fixture-count drift guard.
+
+### Backward compatibility
+
+Pin-only change for `stride-security-review`; the other plugin pins (`stride` `1.33.0`, `stride-ideation` `0.11.0`, `stride-lite` `0.10.0`, `launchdarkly` `0.2.0`) are unchanged. The stride-security-review v2.4.2 change is documentation and one read-only CI guard — no change to the analysis rules, the slash-command flags, or the JSON/SARIF wire shape. Repos that consumed v2.4.1 output continue to parse unchanged; the corrected CI snippet strictly strengthens the documented gate (fails closed on dispatch errors instead of passing silently), so pipelines that copy it get safer, not different, behavior on healthy runs.
+
 ## [1.52.0] - 2026-07-02
 
 ### Updated
