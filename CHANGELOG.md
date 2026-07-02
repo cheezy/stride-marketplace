@@ -2,6 +2,17 @@
 
 All notable changes to the Stride marketplace pin set will be documented in this file.
 
+## [1.52.0] - 2026-07-02
+
+### Updated
+
+- **`.claude-plugin/marketplace.json`** — Bumped the `stride-ideation` plugin pin from `0.10.0` to **`0.11.0`** so `/plugin update stride-ideation@stride-marketplace` pulls the new release. v0.11.0 is an accuracy-and-behavior release (G296 / W1460–W1468): the `requirements-decomposer` contract, all three calibration fixtures (35 tasks), and the batch validator now enforce and model the **five review-queue scored fields** (`acceptance_criteria`, `testing_strategy`, `security_considerations`, `pitfalls`, `patterns_to_follow`) — the decomposer skeleton carries all five with a none-with-reason convention, the fixtures model them with scenario-realistic values, and `lib/validate_batch.py` gains an advisory scored-field completeness pass (stdout warnings, exit code unchanged) plus a fatal `length_limit` check failing oversized `title`/`security_considerations` elements at the server's real varchar(255) code-point bound (`pitfalls`/`key_files` are deliberately excluded — they are unbounded JSONB server-side). `/stridify` Step 8b now stamps `created_by_agent` on every shipped goal (server propagates to child tasks; guaranteed to survive the pre-POST strip with a round-trip regression) so batches are attributed in the `/agents` feed. Documentation corrections: the reviewer check-count contradiction (three → five), the ideate enforcement list gains the round-4 premortem and lean-startup round-5 MVP-design bullets, stale version/smoke-test/test-count claims refreshed in release-stable wording, stale `/decompose`//`ship` command references corrected across six lib scripts, and `drift_check.py` reframed as a documented standalone helper. Marketplace `metadata.version` bumped from `1.51.0` to `1.52.0`.
+- **`README.md`** — Updated the `stride-ideation` row in the `Available Plugins` table to version `0.11.0` with a `v0.11.0:` clause noting the five-scored-field alignment, `created_by_agent` attribution, and validator hardening.
+
+### Backward compatibility
+
+Pin-only change for `stride-ideation`; the other four plugin pins (`stride` `1.33.0`, `stride-security-review` `2.4.1`, `stride-lite` `0.10.0`, `launchdarkly` `0.2.0`) are unchanged. stride-ideation v0.11.0 keeps both commands' surfaces unchanged — the validator's new length check only fails batches the production server would reject anyway, and its scored-field warnings never change the exit code.
+
 ## [1.51.0] - 2026-07-02
 
 ### Updated
