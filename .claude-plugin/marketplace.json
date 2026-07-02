@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Stride task management skills for AI agents",
-    "version": "1.54.0"
+    "version": "1.55.0"
   },
   "plugins": [
     {
@@ -55,8 +55,8 @@
         "source": "url",
         "url": "https://github.com/cheezy/launchdarkly.git"
       },
-      "description": "Generate correct, testable, and removable LaunchDarkly feature-flag code from Claude Code — covers the Java server SDK and the TypeScript SDKs (Node server, client-side JS, React) with skills, scaffolding and flag-removal commands, and an anti-pattern review agent.",
-      "version": "0.2.0",
+      "description": "Generate correct, testable, and removable LaunchDarkly feature-flag code from Claude Code — covers the Java server SDK and the TypeScript SDKs (Node server, client-side JS, React) with skills, scaffolding and flag-removal commands, and an anti-pattern review agent. v0.3.0+: the client-side skill is modernized to the scoped v4 SDKs (@launchdarkly/js-client-sdk and @launchdarkly/react-sdk with createLDReactProvider and typed hooks, the unscoped v3 packages preserved in a labeled legacy section); /launchdarkly:ld-scaffold gains real browser and react targets (four targets total); the reviewer agent gains eight-plus anti-pattern rules; and the plugin now ships a dependency-free scripts/smoke.sh validation gate.",
+      "version": "0.3.0",
       "strict": true
     }
   ]

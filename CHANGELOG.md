@@ -2,6 +2,17 @@
 
 All notable changes to the Stride marketplace pin set will be documented in this file.
 
+## [1.55.0] - 2026-07-02
+
+### Updated
+
+- **`.claude-plugin/marketplace.json`** — Bumped the `launchdarkly` plugin pin from `0.2.0` to **`0.3.0`** so `/plugin update launchdarkly@stride-marketplace` pulls the new release. v0.3.0 is the client-side-era-modernization release (W1488–W1493): the `launchdarkly-typescript-client` skill now teaches the scoped v4 browser and React SDKs (`@launchdarkly/js-client-sdk` with `createClient`/`start()` and typed variation methods; `@launchdarkly/react-sdk` with `createLDReactProvider` and the typed hooks, `useFlags` deprecated) with the unscoped v3 packages preserved in a clearly-labeled legacy subsection; `/launchdarkly:ld-scaffold` gains real **browser** and **react** scaffold targets (four targets total, the previously unreachable branch removed) and `/launchdarkly:ld-remove-flag` becomes React-hook-aware; the `launchdarkly-reviewer` agent grows from six to seventeen anti-pattern rules (the eight the goal specified plus three audit-found parity closures) with a standing skill-to-reviewer parity note; the Java `TestData` examples are aligned with a drift-resistant version placeholder; the README and `launchdarkly-fundamentals` frontmatter are corrected to match the shipped plugin; and the plugin now ships a dependency-free `scripts/smoke.sh` validation gate. The entry description gained a `v0.3.0+:` clause in its existing inline style. Marketplace `metadata.version` bumped from `1.54.0` to `1.55.0`.
+- **`README.md`** — Updated the `launchdarkly` row in the `Available Plugins` table to version `0.3.0` with a `v0.3.0+` clause noting the scoped v4 SDK modernization, the new browser/react scaffold targets, the expanded reviewer rule set, and the new smoke-script validation gate.
+
+### Backward compatibility
+
+Pin-only change for `launchdarkly`; the other plugin pins (`stride` `1.33.0`, `stride-security-review` `2.4.2`, `stride-ideation` `0.11.0`, `stride-lite` `0.11.0`) are unchanged. launchdarkly v0.3.0 is additive — the existing `java` and `typescript` scaffold targets and the original six reviewer rules are preserved; the v3 client-side guidance is demoted to a labeled legacy section rather than removed. The pin is URL-based, so no re-vendoring is required.
+
 ## [1.54.0] - 2026-07-02
 
 ### Updated
