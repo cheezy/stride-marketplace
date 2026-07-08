@@ -2,6 +2,17 @@
 
 All notable changes to the Stride marketplace pin set will be documented in this file.
 
+## [1.56.0] - 2026-07-08
+
+### Updated
+
+- **`.claude-plugin/marketplace.json`** — Bumped the `stride` plugin pin from `1.33.0` to **`1.34.0`** so `/plugin update stride@stride-marketplace` pulls the new release. v1.34.0 makes the `## after_goal` hook fire **reliably regardless of `/complete` response size** (G313). Root cause: the Claude Code harness truncates a large `tool_response.stdout` mid-JSON (the server echoes the full ~46KB `reviewer_result`), so `after_goal` detection parsed invalid JSON and the local push silently never ran — the goal reached Done via the grace worker (status-only, no push), leaving the task branch's commit unmerged. The fix is two-layered and lands in **both** `stride-hook.sh` and `stride-hook.ps1`: a canonical full-response file (`.stride/.last-api-response.json`) is preferred over the truncatable stdout (D118/W1609), and — when that is absent or truncated — the hook spawns a fresh `GET /api/tasks/:id/after_goal_status` call (D119), a subprocess not subject to Bash-tool truncation that needs zero agent cooperation and is THE reliability guarantee; the two paths are mutually exclusive so `## after_goal` runs at most once, and against a server without the endpoint the fresh call is a clean no-op. Also: the shared payload resolver now also feeds the claim `TASK_BASE_REF` refresh (closing an oversized-claim divergence), the response-capture curl pattern and a push-verification step are documented (W1610), and end-to-end truncation tests were added (suites now **388 bash / 270 pwsh**). A W1614 spike confirmed a `PreToolUse` command-rewrite enforcement is security-gated by the harness and not viable — the shipped canonical-file + fresh-call architecture is the correct design. Port parity for the five port plugins is follow-up work. The entry description is unchanged. Marketplace `metadata.version` bumped from `1.55.0` to `1.56.0`.
+- **`README.md`** — Updated the `stride` row in the `Available Plugins` table to version `1.34.0` with a `v1.34.0+` clause noting the size-independent `## after_goal` detection (canonical response file + hook-initiated fresh `GET .../after_goal_status` guarantee, PowerShell parity, 388/270 test suites).
+
+### Backward compatibility
+
+Pin-only change for `stride`; the other plugin pins (`stride-security-review` `2.4.2`, `stride-ideation` `0.11.0`, `stride-lite` `0.11.0`, `launchdarkly` `0.3.0`) are unchanged. stride v1.34.0 is fully backward compatible — the new `.stride/.last-api-response.json` lives under the already-gitignored `.stride/` directory and is excluded from snapshots by name, and a server without the `GET /api/tasks/:id/after_goal_status` endpoint simply falls back to a clean no-op (the grace worker still flips the goal to Done). The pin is URL-based, so no re-vendoring is required.
+
 ## [1.55.0] - 2026-07-02
 
 ### Updated
