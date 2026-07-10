@@ -2,6 +2,17 @@
 
 All notable changes to the Stride marketplace pin set will be documented in this file.
 
+## [1.57.0] - 2026-07-10
+
+### Updated
+
+- **`.claude-plugin/marketplace.json`** — Bumped the `stride` plugin pin from `1.34.0` to **`1.35.0`** so `/plugin update stride@stride-marketplace` pulls the new release. v1.35.0 ships the `changed_files` diff-upload correctness batch on top of v1.34.0: **(D127)** the `after_doing` finalize and `before_review` self-heal now target the PUT at the task id parsed from the authoritative `/complete`|`/mark_reviewed` command URL (a new `task_id_from_command` helper) instead of the claim-time env-cache `TASK_ID`, so a stale or corrupt cache — a piped/truncated claim capture or a host restart before the on-disk cache reloads — can no longer upload the diff to the **previous** task; **(W1658)** when the `before_review` self-heal (the last retry) still returns a non-2xx, the hook logs a distinct `CHANGED_FILES UPLOAD UNRESOLVED` message and appends `unresolved=yes` to `.stride-diff-upload-state` (fail-soft — never vetoes the completion; a later successful PUT self-clears the mark); **(D126)** a root-cause doc + reproduction test for the empty-`changed_files` failure; and **(W1661)** explicit stdout-preserving curl invocation rules across the claiming/completing/workflow skills. Both hook changes land in **`stride-hook.sh` and `stride-hook.ps1`** with tests. The entry description is unchanged. Marketplace `metadata.version` bumped from `1.56.0` to `1.57.0`.
+- **`README.md`** — Updated the `stride` row in the `Available Plugins` table to version `1.35.0` with a `v1.35.0+` clause noting the URL-id targeting fix (D127) and the fail-loud terminal-upload signal (W1658), both mirrored in the PowerShell hook with tests.
+
+### Backward compatibility
+
+Pin-only change for `stride`; the other plugin pins (`stride-security-review` `2.4.2`, `stride-ideation` `0.11.0`, `stride-lite` `0.11.0`, `launchdarkly` `0.3.0`) are unchanged. stride v1.35.0 is fully backward compatible — no `.stride.md`, wire-shape, or `.stride_auth.md` change; the `unresolved=yes` marker is additive to the already-gitignored `.stride-diff-upload-state` and self-clears on the next successful upload. The pin is URL-based, so no re-vendoring is required.
+
 ## [1.56.0] - 2026-07-08
 
 ### Updated
