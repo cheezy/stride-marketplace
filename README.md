@@ -21,6 +21,7 @@ Then install any subset of the plugins below.
 | [`stride-ideation`](#stride-ideation) | 0.11.0 | Turn a fuzzy idea into a committed requirements doc and Stride tasks via two slash commands. v0.7.0: four-layer resilience model on `/stridify`. v0.8.0: a guided, human-in-control `/ideate` session (per-round completeness recap, "I'm not sure — propose candidates" path, profile recommendation, `--input` brain-dump seed, intra-session draft autosave/resume, reviewer-findings decision) plus a `/stridify` preview-and-approval gate with `--yes` bypass. v0.9.0: directory-submission readiness — `SECURITY.md`, completed manifest metadata, self-contained README, and credential-hygiene + install-path audits (no functional change). v0.10.0: a mandatory, advisory **challenge gate** (assumption-confidence audit, blind-spot scan, two alternatives, cost/risk/complexity/timeline trade-off) after the premortem and before the reviewer pass, folding into a new optional "Design challenge" section. v0.11.0: the decomposer, fixtures, and batch validator align on the **five review-queue scored fields** (validator gains advisory completeness warnings + a hard varchar(255) length check), and `/stridify` stamps `created_by_agent` on shipped goals for `/agents`-feed attribution |
 | [`stride-lite`](#stride-lite) | 0.11.0 | File-only lightweight companion — writes Stride-shaped goal and task markdown to disk via `/stride-lite:create-goal` / `/stride-lite:create-task` / `/stride-lite:init`. v0.9.0+ harness-enforced `.stride_lite.md` hook auto-fire (PreToolUse/PostToolUse, cross-platform); v0.10.0+ terminal PENDING → IMPLEMENTED archive move in `stride-lite-workflow`; v0.11.0+ copy installs ship the hook enforcement layer (pre-0.11.0 script installs lacked it — re-run install.sh), harness-executes wording across the init surface, and a 43-assertion smoke suite with hook-routing coverage |
 | [`launchdarkly`](#launchdarkly) | 0.3.0 | Generate correct, testable, and removable LaunchDarkly feature-flag code — Java server SDK plus the TypeScript SDKs (Node server, client-side JS, React) with skills, scaffolding and flag-removal commands, and an anti-pattern review agent. v0.3.0+: client-side skill modernized to the scoped v4 SDKs (`@launchdarkly/js-client-sdk`, `@launchdarkly/react-sdk`) with a labeled legacy v3 section; `/launchdarkly:ld-scaffold` gains browser and react targets (four total); the reviewer agent gains eight-plus new rules; and a dependency-free `scripts/smoke.sh` validation gate ships |
+| [`stride-exploratory-testing`](#stride-exploratory-testing) | 0.1.0 | Drive structured, charter-based exploratory testing sessions in Claude Code — the "explored" half of Tested = Checked + Explored. Five skills (`stride-exploratory-testing`, `chartering`, `heuristics`, `oracles`, `session`), five commands (`/charter`, `/nightmare-headline`, `/explore`, `/recon`, `/debrief`), and two subagents (`charter-generator`, `explorer`). Plan charters, run timeboxed SBTM sessions against a running app under an absolute safety boundary, judge results with oracles, and capture a session sheet + debrief. Ships worked fixtures and a pure-shell smoke-test harness. Encodes established exploratory-testing practice (Kaner, Hendrickson, Bach, Whittaker) |
 
 ---
 
@@ -282,6 +283,29 @@ Generate correct, testable, and removable LaunchDarkly feature-flag code from Cl
 ```
 
 **Repository:** <https://github.com/cheezy/launchdarkly>
+
+---
+
+## stride-exploratory-testing
+
+Drive structured, charter-based exploratory testing sessions in Claude Code — the discipline that supplies the "explored" half of **Tested = Checked + Explored**. Plan a charter, run a timeboxed session against a running app under an absolute safety boundary, judge results with oracles, and capture findings as an SBTM session sheet and a debrief.
+
+**Surface:**
+
+- **Five skills** — `stride-exploratory-testing` (orchestrator), `chartering`, `heuristics`, `oracles`, `session`.
+- **Five slash commands** — `/charter`, `/nightmare-headline`, `/explore`, `/recon`, `/debrief`.
+- **Two subagents** — `charter-generator` (target + risk → ranked charters) and `explorer` (runs one charter to structured findings under the safety boundary).
+- **Fixtures + smoke tests** — worked `example-charters.md`, `example-session-sheet.md`, and `example-debrief.md`, plus a pure-shell `lib/` smoke-test harness.
+
+Encodes established exploratory-testing practice — Cem Kaner, Elisabeth Hendrickson's *Explore It!*, Session-Based Test Management (Bach), James Whittaker's Tours, and the Heuristic Test Strategy Model (Bach).
+
+**Install:**
+
+```bash
+/plugin install stride-exploratory-testing@stride-marketplace
+```
+
+**Repository:** <https://github.com/cheezy/stride-exploratory-testing>
 
 ---
 

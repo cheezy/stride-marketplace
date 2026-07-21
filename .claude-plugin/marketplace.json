@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Stride task management skills for AI agents",
-    "version": "1.59.0"
+    "version": "1.60.0"
   },
   "plugins": [
     {
@@ -57,6 +57,16 @@
       },
       "description": "Generate correct, testable, and removable LaunchDarkly feature-flag code from Claude Code — covers the Java server SDK and the TypeScript SDKs (Node server, client-side JS, React) with skills, scaffolding and flag-removal commands, and an anti-pattern review agent. v0.3.0+: the client-side skill is modernized to the scoped v4 SDKs (@launchdarkly/js-client-sdk and @launchdarkly/react-sdk with createLDReactProvider and typed hooks, the unscoped v3 packages preserved in a labeled legacy section); /launchdarkly:ld-scaffold gains real browser and react targets (four targets total); the reviewer agent gains eight-plus anti-pattern rules; and the plugin now ships a dependency-free scripts/smoke.sh validation gate.",
       "version": "0.3.0",
+      "strict": true
+    },
+    {
+      "name": "stride-exploratory-testing",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/cheezy/stride-exploratory-testing.git"
+      },
+      "description": "Drive structured, charter-based exploratory testing sessions in Claude Code — the discipline that supplies the \"explored\" half of Tested = Checked + Explored. Plan charters, run timeboxed sessions against a running app under an absolute safety boundary, judge results with oracles, and capture findings as an SBTM session sheet and debrief. Surface: five skills (stride-exploratory-testing orchestrator, chartering, heuristics, oracles, session), five slash commands (/charter, /nightmare-headline, /explore, /recon, /debrief), and two subagents (charter-generator, explorer). Ships worked example fixtures (charter set, session sheet, debrief) and a pure-shell smoke-test harness under lib/. Encodes established exploratory-testing practice — Kaner, Hendrickson's Explore It!, SBTM (Bach), Whittaker's Tours, and Bach's Heuristic Test Strategy Model.",
+      "version": "0.1.0",
       "strict": true
     }
   ]

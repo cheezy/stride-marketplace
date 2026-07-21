@@ -2,6 +2,13 @@
 
 All notable changes to the Stride marketplace pin set will be documented in this file.
 
+## [1.60.0] - 2026-07-20
+
+### Added
+
+- **`.claude-plugin/marketplace.json`** — Added a new **`stride-exploratory-testing`** plugin entry (`source: url` → `https://github.com/cheezy/stride-exploratory-testing.git`, `version` **`0.1.0`**, `strict: true`) so `/plugin install stride-exploratory-testing@stride-marketplace` resolves. The plugin drives structured, charter-based exploratory testing sessions in Claude Code — the "explored" half of *Tested = Checked + Explored* — with five skills (`stride-exploratory-testing`, `chartering`, `heuristics`, `oracles`, `session`), five slash commands (`/charter`, `/nightmare-headline`, `/explore`, `/recon`, `/debrief`), two subagents (`charter-generator`, `explorer`), worked fixtures, and a pure-shell smoke-test harness. Marketplace `metadata.version` bumped from `1.59.0` to `1.60.0`.
+- **`README.md`** — Added `stride-exploratory-testing` to the Available Plugins table and a detailed per-plugin section (surface summary, install command, repository link).
+
 ## [1.57.0] - 2026-07-10
 
 ### Updated
