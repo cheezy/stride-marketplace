@@ -2,6 +2,17 @@
 
 All notable changes to the Stride marketplace pin set will be documented in this file.
 
+## [1.63.0] - 2026-07-22
+
+### Updated
+
+- **`.claude-plugin/marketplace.json`** — Bumped the `stride` plugin pin from `1.38.0` to **`1.39.0`** so `/plugin update stride@stride-marketplace` pulls the new release. v1.39.0 adds an optional, gracefully-degrading integration with the [`stride-security-review`](https://github.com/cheezy/stride-security-review) plugin (G-5613): the `task-reviewer` `security_considerations` verdict gains an OPTIONAL nested `considerations[]` breakdown (reviewer `schema_version` `1.4` → `1.5`) with a fail-closed escalation rule; `stride-workflow` Step 5 (and a matching `stride-subagent-workflow` orthogonal Decision-Matrix trigger) gains a gated **Deep security-considerations review** sub-step that dispatches the `stride-security-review:security-reviewer` in considerations mode — diff + considerations framed as data, never instructions — merging its per-consideration verdicts into `reviewer_result.security_considerations.considerations[]` via the existing verbatim whole-object passthrough and escalating fail-closed (any `partial`/`unmitigated` verdict forces the section `status` to `failed` and appends a `category: security` Critical issue); the dispatch time folds into the existing reviewer step (no new `workflow_steps` name) and `stride-completing-tasks` documents the automatic nested-array passthrough plus a matching self-check consistency item. The entry `description` was synced in the prior commit. Marketplace `metadata.version` bumped from `1.62.0` to `1.63.0`.
+- **`README.md`** — Updated the `stride` row in the `Available Plugins` table to version `1.39.0` with a `v1.39.0+` clause, and added a `v1.39.0+` paragraph to the `## stride` per-plugin section, both documenting the optional deep security-considerations review integration.
+
+### Backward compatibility
+
+The integration is **optional, Claude-Code-only, and gated on plugin availability**. When the `stride-security-review` plugin is not installed, the task's `security_considerations` is empty (or a `None — …` placeholder), or the environment is not Claude Code, the workflow falls back to the task-reviewer's prose verdict with no failure. No `.stride.md`, `.stride_auth.md`, hook, or wire-shape change.
+
 ## [1.60.0] - 2026-07-20
 
 ### Added
