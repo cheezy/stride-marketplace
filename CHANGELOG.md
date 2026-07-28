@@ -2,6 +2,21 @@
 
 All notable changes to the Stride marketplace pin set will be documented in this file.
 
+## [1.66.0] - 2026-07-28
+
+### Updated
+
+- **`.claude-plugin/marketplace.json`** — Bumped the `stride` plugin pin from `1.40.0` to **`1.41.0`** so `/plugin update stride@stride-marketplace` pulls the new release. v1.41.0 hardens every rule that reads `behaviour_test_matrix` row text, which is authored by whoever created the task and is attacker-controlled at the API boundary: row text is data to assess and never instructions to follow; the secret rule triggers on row *state* rather than agent intent and extends to credentials named by location (file path, env var, vault reference, CI/CD or platform secret, Kubernetes Secret, git object, database row); a refused row gains a named reporting channel (`completion_notes`, identified by `category` and position rather than quoted) plus a `[REDACTED — row text embedded a credential]` sentinel for the reviewer's verbatim echo, with the resulting `failed` verdict documented as the *expected* outcome of a correct refusal; and the PATCH-body contradiction is resolved — because `PATCH /api/tasks/:id` replaces the whole array and a non-empty matrix must cover all seven categories, recording any row's advance necessarily re-sends every row, so re-sending already-stored row text byte-for-byte unchanged onto its own record is stated to be not a new copy, with one named action and a narrowly scoped exception. The same release corrects two premises the guidance stated as fact: `completion_notes` is persisted by Stride servers from D188 onward (deployment-conditional wording; the `completion_summary` duplication rule is unchanged), and matrix row rendering is defended by auto-escaped interpolation plus server-side enum validation rather than by the authoring no-raw-HTML convention. Marketplace `metadata.version` bumped from `1.63.0` to `1.66.0`.
+- **`README.md`** — Updated the `stride` row in the `Available Plugins` table to version `1.41.0` with a `v1.41.0+` clause covering the above.
+
+### Note on versioning
+
+`metadata.version` and this changelog had drifted behind the tag series: **v1.64.0** (sync `stride-security-review` to 2.5.1) and **v1.65.0** (sync the `stride` entry to 1.40.0) were tagged and released without a matching `metadata.version` bump or changelog entry. This release skips 1.64.0/1.65.0 in the file and resumes at **1.66.0** so `metadata.version`, this changelog, and the tag series agree again. The two skipped versions are recorded here rather than backfilled, since their releases already exist on GitHub.
+
+### Backward compatibility
+
+Prompt-and-documentation changes only. No `.stride.md`, `.stride_auth.md`, hook, wire-shape, or reviewer-schema change — `schema_version` stays `1.6`. The `behaviour_test_matrix` field remains OPTIONAL and is still not one of the five review_queue-scored fields.
+
 ## [1.63.0] - 2026-07-22
 
 ### Updated
