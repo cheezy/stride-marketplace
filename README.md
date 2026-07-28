@@ -320,9 +320,32 @@ Encodes established exploratory-testing practice — Cem Kaner, Elisabeth Hendri
 stride-marketplace/
 ├── .claude-plugin/
 │   └── marketplace.json       # Plugin catalog (the source of truth for plugin versions)
+├── CHANGELOG.md               # One entry per catalog release
 ├── README.md                  # This file
 └── LICENSE                    # MIT
 ```
+
+## Releases and tagging
+
+This catalog carries its own `metadata.version` in `marketplace.json`, independent of the versions it pins. That self-version, this repo's tags, and `CHANGELOG.md` are three records of the same thing, and they only stay honest if every release moves all three together.
+
+**One release is one commit.** Since `v1.64.0` a catalog release is a single commit rather than the two-commit pair described below. That commit should do all four of: bump the plugin's `version` (and `description`, if it changed) in `marketplace.json`, bump `metadata.version`, sync the plugin's row and prose in this README, and add a `## [X.Y.Z]` entry to `CHANGELOG.md`. It is then tagged `vX.Y.Z` and published as a GitHub release. A commit that does only some of those is a half-finished release, not a release.
+
+**The four-step form is newer than the one-commit form.** `v1.64.0` and `v1.65.0` were single commits but did only two of the four steps — they left `metadata.version` behind and wrote no entry, which is the drift `[1.66.0]` had to reconcile. `v1.66.0` is the first commit that did all four. Read "since `v1.64.0`" as when the *shape* changed, and `v1.66.0` as when the *ritual* became complete.
+
+**Earlier releases used two commits, and those are staying as they are.** Through `v1.63.0` the shape was an untagged "Sync … catalog entry" commit that touched only a plugin's own fields, followed by a tagged commit that bumped `metadata.version` (and, for `d69e1ee` alone, also wrote the changelog entry — `4aff71f` and `ea23202` did not). `eeaed1e`, `a44d82b` and `5e33131` are first halves of such pairs — each has its tagged partner (`4aff71f`, `ea23202`, `d69e1ee`). **They are not missed releases and will not be tagged retroactively**; doing so would manufacture a release record for an intermediate state no user ever resolved through.
+
+**Nothing installs through these tags.** `marketplace.json` pins each plugin by a bare repository URL with no ref, so an install resolves to the plugin repo's default branch. The tags and `metadata.version` exist so a human can tell which catalog state they are looking at — which is the whole reason the three records must agree.
+
+**Record divergence; do not silently correct it.** When the records do drift, say so in the changelog entry that fixes it rather than quietly renumbering — the `[1.66.0]` and `[1.67.0]` entries are the worked examples. `v1.64.0` and `v1.65.0` were tagged without a bump or entry; `1.66.0` resumed the sequence and recorded the skip instead of backfilling two releases that already existed on GitHub. When a bump lands without its entry and tag, finish that version rather than bumping past it, or the skipped number is unrecorded forever.
+
+**Check the tag list before choosing a number.** Do not assume the next tag equals the next version — this repo has drifted before. The sibling [`stride-gemini-marketplace`](https://github.com/cheezy/stride-gemini-marketplace) documents its own release conventions, including the rule for what to do when a number is already spent. Note that its catalog tag *mirrors* the pinned extension version, whereas this catalog runs an independent `metadata.version` and mirrors nothing — so borrow the reasoning, not the numbering.
+
+**Known gaps, so the rule above is not read as a description of the present.** Two of the four steps have been kept up reliably and two have not:
+
+- **The per-plugin prose sections lag their pins.** Every row of the *Available Plugins* table is current, but the `##` section for each plugin further down is not: `stride` prose stops at a `v1.40.0+` clause, `stride-ideation` and `stride-lite` at `v0.10.0`, and `stride-security-review` carries no version clause at all. Releases have been syncing the table row and skipping the prose. The four-step rule above states the intent; closing the backlog is separate follow-up work.
+- **Hardcoded counts in prose go stale silently.** The `stride-security-review` section says the eval runs over "64 fixtures"; the pinned plugin ships 72. That plugin's own repo added a CI guard against hardcoded README counts — nothing equivalent covers this catalog, so prefer count-free phrasing in new prose.
+- **Most tags have no changelog entry.** 32 of 63 tags predate the four-step ritual. They are recorded rather than backfilled; see the `[1.66.0]` and `[1.67.0]` entries in [CHANGELOG.md](CHANGELOG.md) for the audit and the reasoning.
 
 ## Support
 
