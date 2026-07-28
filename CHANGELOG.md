@@ -2,6 +2,33 @@
 
 All notable changes to the Stride marketplace pin set will be documented in this file.
 
+## Release record — tags without a GitHub release
+
+*This is a record-keeping note, not a release. It describes no change to this catalog and carries no version.*
+
+A fleet-wide audit found **10 tags** in this repository that are tagged and pushed but have no corresponding GitHub release. **The gap is accepted and will not be backfilled.** It is recorded here so the next release engineer does not rediscover and re-litigate it:
+
+- `v1.9.1` — 2026-04-17
+- `v1.12.0` — 2026-05-08
+- `v1.13.0` — 2026-05-11
+- `v1.15.0` — 2026-05-11
+- `v1.15.1` — 2026-05-11
+- `v1.15.2` — 2026-05-11
+- `v1.21.0` — 2026-05-13
+- `v1.22.0` — 2026-05-13
+- `v1.23.0` — 2026-05-13
+- `v1.25.0` — 2026-05-19
+
+**This is a different gap from the one the `[1.66.0]` and `[1.67.0]` entries record.** Those describe tags with no *changelog entry*; this note describes tags with no *GitHub release*. A tag can be missing either, both, or neither, and the two lists do not coincide.
+
+Why accepted rather than backfilled:
+
+- **Nothing resolved through these releases.** A GitHub release is a human-readable record, not a resolution mechanism — nothing installs *through* one. The missing releases cost nothing at the time and cost nothing now.
+- **Backfilling would be worse than the gap.** A release created today against a commit from April or May would be dated today, and would manufacture a record for a state no user ever resolved through — misrepresenting the very history it claims to document.
+- **The convention itself is unchanged.** These are omissions from a few release cycles, not a policy shift. Every tag still gets a release going forward.
+
+The audit also found **zero** GitHub releases without a matching tag, so the record is incomplete in only this one direction.
+
 ## [1.67.0] - 2026-07-28
 
 ### Updated
