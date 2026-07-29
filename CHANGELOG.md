@@ -29,6 +29,21 @@ Why accepted rather than backfilled:
 
 The audit also found **zero** GitHub releases without a matching tag, so the record is incomplete in only this one direction.
 
+## [1.70.0] - 2026-07-29
+
+### Updated
+
+- **`.claude-plugin/marketplace.json`** — Bumped the `stride` plugin pin from `1.44.0` to **`1.47.0`** so `/plugin update stride@stride-marketplace` pulls the three releases cut since the last sync. `1.45.0` stops the `task-reviewer` worked example echoing a matrix row `passing` for a behaviour the same review proves defective — the Lifecycle / wiring row claimed the move broadcasts exactly once while three other legs of the same example state it broadcasts twice, so under the file's own Mismatch definition the row was a Mismatch echoed `passing`, inside an example prefaced "Mimic this shape exactly" (D198). `1.46.0` moves the three-value to two-value severity collapse out of worked-example commentary and into the two normative loci — review step 1 and the `acceptance_criteria` hard rule — so a reviewer working the numbered steps in order no longer meets a flat "If any criterion is Not Met, flag it as a Critical issue" ~90 lines before the reconciliation that qualifies it, and the hard rule finally covers the wholly-absent case and its `critical` severity (D199). `1.47.0` splits the completion gate's ~826-word bidirectional checkbox into a ~201-word scannable check plus a named, explicitly-binding sub-block, moving every clause **verbatim** — the move was proven character-for-character rather than asserted, with zero characters lost (D200). Marketplace `metadata.version` bumped from `1.69.0` to `1.70.0`.
+- **`README.md`** — Updated the `stride` row in the `Available Plugins` table to version `1.47.0` with a short three-clause addition, and added `v1.45.0+`, `v1.46.0+` and `v1.47.0+` narrative clauses to the `## stride` prose section so it again cites its pin as its highest version.
+
+### Note on the catalog-only releases in this window
+
+Four commits in this cycle (**D194**–**D197**) changed this README alone and carry **no** `metadata.version` bump and no pin change, so they ship under the `1.69.0` number rather than taking one of their own. They correct the catalog's own accuracy rather than what it distributes: the intro sentence said "Five plugins" against a six-entry manifest and omitted `stride-exploratory-testing` entirely (D194); the `## stride` **Agents:** list named four agents where `stride/agents/` ships five, with `task-enricher` missing even though the same section referred to it twice in prose (D195); the *Automatic Hook Execution* event table had been frozen at four rows since `v1.5.0` and omitted `after_goal`, contradicting three other statements in the same section (D196); and the *Known gaps* tag figure read "32 of 63 tags" where the repo measures 64, with "Most" overstating what is at most half (D197). Each was rewritten count-free where a count was the thing that rotted, per this section's own preference.
+
+### Backward compatibility
+
+Pin-and-documentation changes only. No `.stride.md`, `.stride_auth.md`, hook, wire-shape, or reviewer-schema change — `schema_version` stays `1.6` across all three `stride` releases, and no plugin pin other than `stride` is touched.
+
 ## [1.69.0] - 2026-07-29
 
 ### Updated
