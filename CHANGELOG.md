@@ -29,6 +29,21 @@ Why accepted rather than backfilled:
 
 The audit also found **zero** GitHub releases without a matching tag, so the record is incomplete in only this one direction.
 
+## [1.68.0] - 2026-07-29
+
+### Updated
+
+- **`.claude-plugin/marketplace.json`** — Bumped the `stride` plugin pin from `1.42.0` to **`1.43.0`** so `/plugin update stride@stride-marketplace` pulls the new release. v1.43.0 gives the `task-reviewer` worked example's `not_met` acceptance criterion a backing issue. The criterion's `evidence` had ended "…see the critical issue above" while no such issue existed, so the cross-reference dangled and the example demonstrated the opposite of what review step 1 and the `acceptance_criteria` hard rule both require; `acceptance_criteria` was another category mandated in prose and demonstrated in no worked instance, the same defect class `1.42.0` closed for `security`. It is not the last one — `pattern` remains undemonstrated and is recorded in the plugin's own entry as deliberately deferred. The example now carries an `important`-severity `category: "acceptance_criteria"` entry over a synthetic double broadcast, with `issue_counts`, the `summary`, and the criterion's `evidence` moved to match, and the preamble's two enumerations reconciled — the criterion had been listed as a sixth item outside the five-issue enumeration. The preamble also resolves the Critical-vs-Important question the two rules left open, by documenting that review step 1's three-value working scale (Met / Partially Met / Not Met) collapses into the two-value emitted `status` enum, so a partially-satisfied criterion is emitted `"not_met"` while keeping `important` severity. Marketplace `metadata.version` bumped from `1.67.0` to `1.68.0`.
+- **`README.md`** — Updated the `stride` row in the `Available Plugins` table to version `1.43.0` with a short `v1.43.0+` clause, and added the matching `v1.43.0+` clause to the `## stride` prose section, keeping both surfaces in sync per the four-step rule.
+
+### Backward compatibility
+
+Prompt-and-documentation changes only. No `.stride.md`, `.stride_auth.md`, hook, wire-shape, or reviewer-schema change — `schema_version` stays `1.6`, and the seven-value `issues[].category` enum the example draws from was already legal. No plugin pin other than `stride` is touched.
+
+### Note on the prose surface (D189)
+
+The per-plugin prose backlog recorded as a known gap in `[1.67.0]`'s fifth bullet was closed by **D189**, immediately before this release: `## stride`, `## stride-ideation`, `## stride-lite` and `## stride-security-review` were all brought up to their pins, the stale "64 fixtures" count was replaced with count-free phrasing, and the README's `Known gaps` block was rewritten to describe the resulting state. D189 kept the two-surface convention rather than declaring one canonical, and recorded that decision plus the remaining problem — the `stride` table cell is a single line of roughly 14 KB — as its own gap. This release is the first to follow the resulting guidance: the table-cell addition above is deliberately short, with the detail carried in the prose section.
+
 ## [1.67.0] - 2026-07-28
 
 ### Updated
