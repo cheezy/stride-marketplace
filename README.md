@@ -109,6 +109,7 @@ The plugin ships Claude Code hooks that automatically execute `.stride.md` comma
 | PreToolUse (Bash) | `/api/tasks/:id/complete` | `after_doing` (blocks on failure) |
 | PostToolUse (Bash) | `/api/tasks/:id/complete` | `before_review` |
 | PostToolUse (Bash) | `/api/tasks/:id/mark_reviewed` | `after_review` |
+| PostToolUse (Bash) | `/api/tasks/:id/complete` or `/api/tasks/:id/mark_reviewed`, when the completing task is the parent goal's final child | `after_goal` (blocking, 60s timeout) |
 
 Task environment variables (`$TASK_IDENTIFIER`, `$TASK_TITLE`, etc.) are cached from the claim response and available to all hooks. Structured JSON diagnostics are emitted on both success and failure for integration with the hook-diagnostician agent.
 
