@@ -69,6 +69,7 @@ Task lifecycle skills for Stride kanban: claiming, completing, creating tasks an
 
 **Agents:**
 
+- `stride:task-enricher` — Explores the codebase to fill in a sparse task before it is claimed, discovering `key_files`, `patterns_to_follow`, `testing_strategy`, and `verification_steps` for the orchestrator to PATCH onto the task
 - `stride:task-decomposer` — Breaks goals and large tasks into dependency-ordered child tasks
 - `stride:task-explorer` — Targeted codebase exploration after claiming a task, guided by `key_files` and `patterns_to_follow`
 - `stride:task-reviewer` — Pre-completion code review validating changes against `acceptance_criteria` and `pitfalls`
