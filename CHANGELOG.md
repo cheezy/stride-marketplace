@@ -29,6 +29,17 @@ Why accepted rather than backfilled:
 
 The audit also found **zero** GitHub releases without a matching tag, so the record is incomplete in only this one direction.
 
+## [1.69.0] - 2026-07-29
+
+### Updated
+
+- **`.claude-plugin/marketplace.json`** — Bumped the `stride` plugin pin from `1.43.0` to **`1.44.0`** so `/plugin update stride@stride-marketplace` pulls the new release. v1.44.0 resolves two one-directional rule gaps in the reviewer schema of record. A reviewer finding a genuine vulnerability on a task that supplied no `security_considerations` was caught between the empty-section rule (emit `not_assessed`) and the Consistency rule (emit `failed`), with no documented winner — and the cheapest escape from an unresolvable constraint is to suppress the finding. The four-tile verdict rule now states that a real finding outranks `not_assessed` in all four sections, names suppression and re-labelling as the worse defect, and reframes the v1.41.0 credential carve-out as the worked instance of that general rule rather than the sole exception. Review step 5 now assesses its dimensions whether or not the task listed considerations. Both nested-array escalation rules gain a reverse direction, deliberately opposite: `failed` beside an all-`mitigated` `considerations[]` is legitimate (the failure can originate outside the task's list), while `failed` beside no `failing` matrix row is a defect (`rows[]` enumerates everything that verdict can be about). Marketplace `metadata.version` bumped from `1.68.0` to `1.69.0`.
+- **`README.md`** — Updated the `stride` row in the `Available Plugins` table to version `1.44.0` with a short `v1.44.0+` clause, and added the matching `v1.44.0+` clause to the `## stride` prose section, keeping both surfaces in sync per the four-step rule.
+
+### Backward compatibility
+
+Prompt-and-documentation changes only. No `.stride.md`, `.stride_auth.md`, hook, wire-shape, or reviewer-schema change — `schema_version` stays `1.6`, and neither the three-state section-status enum nor the seven-value `issues[].category` enum changes. No plugin pin other than `stride` is touched.
+
 ## [1.68.0] - 2026-07-29
 
 ### Updated
