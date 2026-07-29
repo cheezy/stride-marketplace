@@ -1,6 +1,6 @@
 # Stride Marketplace
 
-Five plugins for [Claude Code](https://docs.claude.com/en/docs/claude-code) — four that integrate with the [Stride](https://www.stridelikeaboss.com) task management platform (task lifecycle, AI-powered security review, structured ideation, and a file-only lightweight companion) plus a LaunchDarkly feature-flag codegen plugin. Each plugin is independent and can be installed on its own.
+Plugins for [Claude Code](https://docs.claude.com/en/docs/claude-code) — task lifecycle, AI-powered security review, structured ideation, and a file-only lightweight companion for the [Stride](https://www.stridelikeaboss.com) task management platform, plus [`stride-exploratory-testing`](#stride-exploratory-testing) for charter-based exploratory testing sessions and a LaunchDarkly feature-flag codegen plugin. Each plugin is independent and can be installed on its own.
 
 ## Installation
 
