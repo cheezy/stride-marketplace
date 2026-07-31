@@ -15,8 +15,8 @@
         "source": "url",
         "url": "https://github.com/cheezy/stride.git"
       },
-      "description": "Drive the full Stride kanban task lifecycle from Claude Code — claiming, completing, creating and enriching tasks and goals, workflow orchestration, subagent dispatch, and automatic lifecycle hook execution, with optional gated integrations for exploratory manual testing and deep security-considerations review.",
-      "version": "1.47.0",
+      "description": "Drive the full Stride kanban task lifecycle from Claude Code — claiming, completing, creating and enriching tasks and goals, workflow orchestration, subagent dispatch, and automatic lifecycle hook execution, with optional gated integrations for exploratory manual testing, hardening findings into drafted regression checks, and deep security-considerations review.",
+      "version": "1.53.0",
       "strict": true
     },
     {
