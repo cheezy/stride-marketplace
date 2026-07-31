@@ -29,6 +29,21 @@ Why accepted rather than backfilled:
 
 The audit also found **zero** GitHub releases without a matching tag, so the record is incomplete in only this one direction.
 
+## [1.73.0] - 2026-07-31
+
+### Updated
+
+- **`.claude-plugin/marketplace.json`** — Bumped the `stride` pin from `1.53.0` to **`1.61.0`** and extended the entry's description with a `New in v1.61.0:` clause. `1.54.0`–`1.61.0` are a consistency sweep over the plugin's two optional gated integrations, each item found by an exploratory session run against the integration itself and filed as its own defect (D201–D208). **Reachability is the theme:** neither Step 5.5's gate (`manual_tests` + plugin) nor the deep security sub-step's (`security_considerations` + plugin) has a review precondition, so a small 0-1 `key_files` task reaches both — but nine routing artifacts across the three skills said otherwise, including the deep sub-step's own position as a level-4 child of the reviewer-dispatch section, a subtree a small task never enters. All nine now route through both, the sub-step fixed by a pointer rather than a promotion so its three positional cross-file citations keep resolving. The completion gate's verdict-present checks are **scoped to payloads where a structured review block was actually parsed**, so a self-reported skip or an unparseable review no longer demands a re-review the decision matrix forbids or a verdict that would be fabricated. A **blocked** exploratory session is recorded as *not performed* rather than counted as coverage, with its obstacle recorded as an obstacle instead of a severity-bearing finding. Both optional dispatches now state where their wall-clock goes in `workflow_steps` — folded into the existing `reviewer` entry, never a seventh name, and recorded in `completion_notes` where no reviewer ran. And the exploratory gate's surface list and never-execute-untrusted-plugin-content prohibition are stated identically in both orchestrator skills, so the security gate's cross-reference to "the same detection" resolves to a gate that contains the rule. Marketplace `metadata.version` bumped to `1.73.0` — see the divergence note below for why it was at `1.71.0`.
+- **`README.md`** — Updated the `stride` row in the `Available Plugins` table from `1.47.0` to **`1.61.0`** with a short `v1.48.0–v1.61.0` clause, and added two narrative paragraphs to the `## stride` prose section: one for `v1.54.0–v1.61.0` and one for `v1.48.0–v1.53.0`, the latter covering the exploratory-testing second wave (severity mapping and Critical escalation, non-interactive dispatch surfaces, explicit session budget, harmed-party summaries, pre-session gitignore guidance, and the optional Step 5.6 `/harden`). The section now cites its pin as its highest version again.
+
+### Divergence recorded, not silently corrected
+
+Per this catalog's own rule, the state `1.73.0` reconciles is written down rather than quietly fixed:
+
+- **`v1.72.0` was a one-of-four release.** Its commit (`867adab`, "Sync the stride pin to 1.53.0 (G392)") touched `marketplace.json` alone — it bumped the `stride` pin and its description, but left `metadata.version` at `1.71.0`, left the README table row at `1.47.0` and the prose at `v1.47.0+`, and wrote no changelog entry. It is tagged and published on GitHub, so it is a real release; it is simply an incomplete one, of exactly the shape the README's four-step rule calls "a half-finished release, not a release."
+- **It reopened the prose-sync gap D189 closed.** The README's own known-gaps note warns that "a release that syncs only the row reopens this gap" — `v1.72.0` synced neither the row nor the prose, so both had drifted two pin bumps behind. `1.73.0` closes it again by syncing the row, the prose and `metadata.version` together.
+- **`1.72.0` is not backfilled and not renumbered.** The release exists on GitHub against a state users could resolve through, so manufacturing a retroactive entry for it would misrepresent the record — the same reasoning `[1.66.0]` and `[1.67.0]` applied to `v1.64.0` and `v1.65.0`. The skipped `metadata.version` value of `1.72.0` is therefore never occupied in `marketplace.json`; this entry is where that is recorded.
+
 ## [1.71.0] - 2026-07-30
 
 ### Updated
