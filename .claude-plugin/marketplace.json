@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Stride task management skills for AI agents",
-    "version": "1.70.0"
+    "version": "1.71.0"
   },
   "plugins": [
     {
@@ -65,8 +65,8 @@
         "source": "url",
         "url": "https://github.com/cheezy/stride-exploratory-testing.git"
       },
-      "description": "Drive structured, charter-based exploratory testing sessions in Claude Code — the discipline that supplies the \"explored\" half of Tested = Checked + Explored. Plan charters, run timeboxed sessions against a running app under an absolute safety boundary, judge results with oracles, and capture findings as an SBTM session sheet and debrief. Surface: five skills (stride-exploratory-testing orchestrator, chartering, heuristics, oracles, session), five slash commands (/charter, /nightmare-headline, /explore, /recon, /debrief), and two subagents (charter-generator, explorer). Ships worked example fixtures (charter set, session sheet, debrief) and a pure-shell smoke-test harness under lib/. Encodes established exploratory-testing practice — Kaner, Hendrickson's Explore It!, SBTM (Bach), Whittaker's Tours, and Bach's Heuristic Test Strategy Model.",
-      "version": "0.1.0",
+      "description": "Drive structured, charter-based exploratory testing sessions in Claude Code — the discipline that supplies the \"explored\" half of Tested = Checked + Explored. Plan charters, run timeboxed sessions against a running app under an absolute safety boundary, judge results with oracles, and capture findings as an SBTM session sheet and debrief. Surface: six skills (stride-exploratory-testing orchestrator, chartering, heuristics, oracles, bug-advocacy, session), seven slash commands (/charter, /nightmare-headline, /explore, /pair, /recon, /debrief, /harden), and two subagents (charter-generator, explorer). Pairs with a human driving the app (/pair), turns confirmed bugs into drafted regression checks in your own test framework (/harden), and persists session artifacts, a charter backlog, and a coverage map under .exploratory/ so findings survive the conversation. Ships worked example fixtures (charter set, session sheet, debrief) and a pure-shell smoke-test harness under lib/. Encodes established exploratory-testing practice — Kaner, Hendrickson's Explore It!, SBTM (Bach), Whittaker's Tours, and Bach's Heuristic Test Strategy Model.",
+      "version": "0.2.0",
       "strict": true
     }
   ]
