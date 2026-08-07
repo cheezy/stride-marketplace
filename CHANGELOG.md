@@ -29,6 +29,18 @@ Why accepted rather than backfilled:
 
 The audit also found **zero** GitHub releases without a matching tag, so the record is incomplete in only this one direction.
 
+## [1.74.0] - 2026-08-07
+
+Sync the `stride-lite` pin to **0.12.0**.
+
+That release adds three optional gated sub-steps to `stride-lite-workflow`, each dispatching an agent from a **different** plugin — `stride-exploratory-testing:explorer` per charter (Step 6a), `/harden` on confirmed findings (Step 6b), and `stride-security-review:security-reviewer` in considerations mode (Step 6c). All three skip cleanly when that plugin is absent and none can fail a task, so an install without either companion behaves exactly as before. It also ships `SECURITY.md`, which states the trust boundary the plugin had never written down (it executes arbitrary user-authored shell commands from `.stride_lite.md`, unvalidated) and records that the activation marker is a forgeable coordination signal and never an authorization.
+
+Four defects fixed, three of them found by test suites that release introduced. Two had left the native-Windows hook path non-functional: the executor read stdin via `@($input)`, empty for an OS-level pipe, so the documented auto-fire had never worked and exited 0 without reporting it (D215); and `Start-Process -ArgumentList` re-split every command, so `bash` received only its first token (D218). The other two are workflow-integrity fixes — a bullet or numbered `## Key files` list counted zero and sent a multi-file task to `skip-all` with no review (D216), and a mispaired code fence rendered part of an agent contract as sample output (D217).
+
+Per this README's rule that a table cell carries a short clause and the prose carries the detail, the *Available Plugins* row gains a one-clause summary and the `## stride-lite` section gains a full `v0.12.0+` callout, so the section's highest cited version again equals its pin.
+
+All four steps done in this one commit: the `stride-lite` pin and description in `marketplace.json`, `metadata.version`, the README row **and** prose, and this entry.
+
 ## [1.73.0] - 2026-07-31
 
 ### Updated
