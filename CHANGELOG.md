@@ -29,6 +29,22 @@ Why accepted rather than backfilled:
 
 The audit also found **zero** GitHub releases without a matching tag, so the record is incomplete in only this one direction.
 
+## [1.75.0] - 2026-08-07
+
+Sync the `stride` pin to **1.62.0**.
+
+That release cuts the orchestrator skill's per-task context footprint by **42%** — `skills/stride-workflow/SKILL.md` goes 139,972 → 80,523 bytes — by moving gated and cold content into sibling reference files loaded on demand. Steps 5.5 and 5.6 keep their gate, Decision Summary and an explicit load instruction inline while their bodies move out; every non-Claude-Code branch consolidates into one file loaded at Platform Detection; and six cold lookup sections move to a reference file. Content was **moved, never deleted** — each extraction was proved lossless by reconstructing the pre-change file from its parts and diffing byte-for-byte against git.
+
+**The pin is worth taking for the defect, not the size.** Step 7's worked `reviewer_result` example had fallen behind the contract it illustrated, listing five keys where the server requires eight structured sections on any dispatched review and rejects on them **unconditionally, regardless of the grace flag**. Any agent building its completion payload from that example was getting a hard `422`. Installs on 1.61.0 or earlier are exposed to it.
+
+The release also specifies how Step 5 derives the diff it hands the reviewer — previously left to improvisation, most naturally a bare `git diff` that silently omits staged hunks and untracked files and returns nothing inside a nested subrepo — and adds the data-not-instructions framing and redaction rules that dispatch had been missing.
+
+**Recorded because the catalog should not overstate it:** that release's own goal targeted under 40KB and did not reach it, and says so in its notes. The remaining bulk is hot-path procedure that cannot be extracted without deleting rules.
+
+Per this README's rule that a table cell carries a short clause and the prose carries the detail, the *Available Plugins* row gains a one-clause summary and the `## stride` section gains a full `v1.62.0` callout, so the section's highest cited version again equals its pin.
+
+All four steps done in this one commit: the `stride` pin and description in `marketplace.json`, `metadata.version`, the README row **and** prose, and this entry.
+
 ## [1.74.0] - 2026-08-07
 
 Sync the `stride-lite` pin to **0.12.0**.
