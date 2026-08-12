@@ -29,6 +29,14 @@ Why accepted rather than backfilled:
 
 The audit also found **zero** GitHub releases without a matching tag, so the record is incomplete in only this one direction.
 
+## [1.77.0] - 2026-08-12
+
+- **`stride` 1.63.0 → 1.64.0.** Task-attributed `changed_files` (a task's snapshot carries the commits that task made, not its nested tasks'), a one-document hook stdout contract so harness-facing fields are actually read, durable per-hook result files, a required substantive note on a `"failed"` section verdict, and hook test suites that calibrate machine load so their failure count no longer depends on what else is running.
+
+### Divergence recorded rather than backfilled
+
+`v1.76.0` was a **two-of-four** release: it bumped `metadata.version` and the `stride` pin in `marketplace.json`, but left the Available Plugins table row at **1.62.0** (one release stale even before this one) and wrote no CHANGELOG entry. Per this catalog's own rule the published tag is left as it stands and the gap is reconciled here — this entry does all four steps, and the table row moves 1.62.0 → 1.64.0 in one jump, skipping 1.63.0, which is why the jump is larger than a single release.
+
 ## [1.75.0] - 2026-08-07
 
 Sync the `stride` pin to **1.62.0**.
