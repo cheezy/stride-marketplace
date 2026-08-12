@@ -29,6 +29,12 @@ Why accepted rather than backfilled:
 
 The audit also found **zero** GitHub releases without a matching tag, so the record is incomplete in only this one direction.
 
+## [1.78.0] - 2026-08-12
+
+- **`stride` 1.64.0 → 1.65.0.** An optional `workflow_steps[].reason_code` beside the free-text `reason`, so the compliance skip breakdown aggregates instead of producing one row per entry — six values derived by classifying every skipped entry on a real board (73 entries had produced 58 distinct prose strings averaging 145 characters), optional and omittable so agents that predate it complete unchanged on any runtime. Plus write-then-summarise for all three report-producing agents: `task-reviewer`, `task-explorer` and the generic `Plan` dispatch now persist their full output under `.stride/` and return a bounded summary naming the path — 24 lines / 2,000 characters for the reviewer, a deliberately looser 60 lines / 6,000 characters for the explorer and planner, whose summaries are implemented from rather than parsed. A dispatch that supplies no path writes nothing and emits inline, so older orchestrators keep working.
+
+This entry does all four steps, and the records agreed going in: `metadata.version` was at `1.77.0`, the `stride` pin and the Available Plugins table row were both at `1.64.0`, and `v1.77.0` carries a CHANGELOG entry. No divergence to reconcile this time — the `[1.77.0]` entry closed the `v1.76.0` two-of-four gap, and nothing has drifted since.
+
 ## [1.77.0] - 2026-08-12
 
 - **`stride` 1.63.0 → 1.64.0.** Task-attributed `changed_files` (a task's snapshot carries the commits that task made, not its nested tasks'), a one-document hook stdout contract so harness-facing fields are actually read, durable per-hook result files, a required substantive note on a `"failed"` section verdict, and hook test suites that calibrate machine load so their failure count no longer depends on what else is running.
