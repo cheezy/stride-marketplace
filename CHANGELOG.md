@@ -29,6 +29,12 @@ Why accepted rather than backfilled:
 
 The audit also found **zero** GitHub releases without a matching tag, so the record is incomplete in only this one direction.
 
+## [1.79.0] - 2026-08-14
+
+- **`stride` 1.65.0 → 1.66.0.** The hot-path re-extraction with byte budgets: `stride-workflow/SKILL.md` back to 89,647 bytes and `stride-completing-tasks/SKILL.md` from 100,085 to 56,750, each with cold material moved into gated sibling files (pointers at every original site; every gate, matrix, Decision Summary and prompt-injection framing rule inline; the completion contract re-verified against the server's validation modules with no field requirement, schema shape or enum value changed), plus `scripts/check-skill-budgets.sh` as hook-suite Group 28 — budgets 12-13% above post-extraction sizes, so ordinary edits pass and only sustained regrowth trips. Also: slim-view adoption on the index/tree GETs and the complete acknowledgement, dispatcher mode's projected `fields=status,needs_review` read, and the completed-status confirmation gate in `reference.md`'s dispatcher summaries. Claim and next deliberately stay full.
+
+This entry does all four steps, and the records agreed going in: `metadata.version` was at `1.78.0`, the `stride` pin and the Available Plugins table row were both at `1.65.0`, and `v1.78.0` carries a CHANGELOG entry. No divergence to reconcile.
+
 ## [1.78.0] - 2026-08-12
 
 - **`stride` 1.64.0 → 1.65.0.** An optional `workflow_steps[].reason_code` beside the free-text `reason`, so the compliance skip breakdown aggregates instead of producing one row per entry — six values derived by classifying every skipped entry on a real board (73 entries had produced 58 distinct prose strings averaging 145 characters), optional and omittable so agents that predate it complete unchanged on any runtime. Plus write-then-summarise for all three report-producing agents: `task-reviewer`, `task-explorer` and the generic `Plan` dispatch now persist their full output under `.stride/` and return a bounded summary naming the path — 24 lines / 2,000 characters for the reviewer, a deliberately looser 60 lines / 6,000 characters for the explorer and planner, whose summaries are implemented from rather than parsed. A dispatch that supplies no path writes nothing and emits inline, so older orchestrators keep working.
