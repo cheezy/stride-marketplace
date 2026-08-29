@@ -29,6 +29,28 @@ Why accepted rather than backfilled:
 
 The audit also found **zero** GitHub releases without a matching tag, so the record is incomplete in only this one direction.
 
+## [1.85.0] - 2026-08-29
+
+Tagged `v1.86.0`. The tag has run one ahead of `metadata.version` since 1.82.0;
+this is the fourth entry in that run, recorded rather than renumbered, per this
+README's own rule that divergence is written down instead of silently corrected.
+
+### Changed
+
+- **`stride` 1.71.0 → 1.72.0.** Twenty-three commits. Two gates stop reporting a
+  subject clean without looking at it: the reviewer could never return `approved`
+  on a task carrying a commit criterion (**W2127**), and two of fifty-seven canon
+  cells sat in the one status excluded from every check while the run exited 0
+  (**D302**). The three curl invocation rules become a PreToolUse gate rather than
+  prose that had already failed under load (**W2131**). And eleven commits
+  converge the two independent halves of the port-canon drift check, which had
+  returned opposite verdicts on a NUL-bearing canon and blocked forever on a
+  named pipe (**D285**, **D293**–**D299**).
+- The `stride` release also wrote the eleven CHANGELOG entries its own 1.72.0
+  section had flagged as missing, rather than tagging over them — that section
+  had carried a note warning that tagging as-is would ship eleven undocumented
+  commits.
+
 ## [1.84.0] - 2026-08-23
 
 One pin. `stride` 1.70.0 -> 1.71.0 closes **all four follow-ups the previous entry filed** — D286, D288, D289 and D290 — plus D287 and one paired gate, W2107. Filing them rather than folding them in was the right call and this records the other half of it: they were closed in the next window, not left.
