@@ -29,6 +29,26 @@ Why accepted rather than backfilled:
 
 The audit also found **zero** GitHub releases without a matching tag, so the record is incomplete in only this one direction.
 
+## [1.86.0] - 2026-08-31
+
+Tagged `v1.87.0`. The tag has run one ahead of `metadata.version` since 1.82.0;
+this is the fifth entry in that run, recorded rather than renumbered, per this
+README's own rule that divergence is written down instead of silently corrected.
+
+### Changed
+
+- **`stride` 1.72.0 → 1.73.0.** Five commits, the four tasks of goal G416. The
+  Stride loop stops being prose an agent can decline: a completion writes
+  evidence that it happened (**W2123**), a `Stop` hook reads that evidence and
+  refuses to end a session while a claimable task remains (**W2124**), the four
+  states a session may legitimately end in are named and made checkable rather
+  than asserted (**W2125**), and the gate's permit paths — the half that strands
+  sessions when it regresses — are pinned by tests on both halves (**W2126**).
+- The loop-state and terminal-state records both carry **no free text**, which
+  was a correction rather than the first draft: the halt record originally
+  stored the user's message verbatim, and a user's words or a Stride command can
+  carry a credential into a file that outlives the turn.
+
 ## [1.85.0] - 2026-08-29
 
 Tagged `v1.86.0`. The tag has run one ahead of `metadata.version` since 1.82.0;
