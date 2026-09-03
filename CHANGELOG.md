@@ -29,6 +29,14 @@ Why accepted rather than backfilled:
 
 The audit also found **zero** GitHub releases without a matching tag, so the record is incomplete in only this one direction.
 
+## [1.87.0] - 2026-09-03
+
+### Changed
+
+- **`stride` 1.73.0 → 1.74.0** — goal G417, which bounds the review cycle so the quality gate converges instead of looping. Review is capped at two rounds with the second scoped to verifying round one's fixes and the cap enforced by `round_cap_ok` on both extraction paths (W2128); an optional `cosmetic` flag lets a purely presentational finding be reported without buying a round, pinned by `cosmetic_shape_ok` against critical, important and security findings (W2129); and the reviewer step records an optional `dispatch_count` so the phase's cost lands in the record, with six stated limits because the pair it records can rank two tasks in the wrong order (W2130). Nothing weakens: Critical and Important correctness findings still block, every new key is optional, and the six-name `workflow_steps` vocabulary is unchanged.
+- Catalog `metadata.version` 1.86.0 → 1.87.0; README table row and the `## stride` prose section both synced.
+- **Tag divergence, recorded rather than corrected:** this entry is tagged `v1.88.0`, not `v1.87.0`. The mirror number was already spent by the previous release's tag, so the next free number after head is taken per this README's "check the tag list before choosing a number" rule. That is the sixth consecutive entry whose tag runs one ahead of `metadata.version`; the gap widens rather than closes, and nothing resolves through these tags.
+
 ## [1.86.0] - 2026-08-31
 
 Tagged `v1.87.0`. The tag has run one ahead of `metadata.version` since 1.82.0;
