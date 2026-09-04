@@ -29,6 +29,17 @@ Why accepted rather than backfilled:
 
 The audit also found **zero** GitHub releases without a matching tag, so the record is incomplete in only this one direction.
 
+## [1.88.0] - 2026-09-04
+
+### Changed
+
+- **`stride` 1.74.0 → 1.75.0** — goal G425, which registers the three rules 1.74.0 shipped as ones every port is expected to carry. `docs/port-canon.md` gains entries `review-round-cap`, `cosmetic-finding-class` and `dispatch-count-telemetry`, each `check: "anchor"` and each quoting its governed text verbatim in Provenance rather than paraphrasing it, with the matching `v1` anchors placed beside the governed text in the plugin's own skill and reviewer contract. The point is what a green check used to mean: nothing was watching these three, so a port that never received the round cap was indistinguishable from one that had it.
+- **The drift check now exits 1, and this entry records that as expected.** It reports `ok 62, missing 36`; the pre-entry baseline was `ok 59, missing 5` and **already** exited 1, those five being the pre-existing `stop-hook-capability` gap. The three entries opened 31 further cells — 16 across 8 ports for the cap and the cosmetic class, 6 for `dispatch_count`, 9 across the 3 vendored catalog copies — and 31 plus 5 reconciles exactly with 36. The red is the worklist the port goals will be measured against; expect it until they land, and do not read it as a break or revert it.
+- **`stride-lite` and `stride-opencode-lite` are `not_applicable` for `dispatch-count-telemetry` only**, on the structural ground that neither emits a `workflow_steps` object nor has a completion endpoint — read from those ports' own text rather than assumed from the canon. Both still owe the other two rules; a port that *cannot* carry a rule is kept distinct from one that has not got to it yet.
+- Catalog `metadata.version` 1.87.0 → 1.88.0; README table row bumped and the `## stride` prose section given a `**v1.75.0:**` paragraph. The table's summary cell was **not** extended, per this README's own Known gaps note that the cell has already become a second cumulative narrative — the detail belongs in the prose section.
+- **Tag divergence, recorded rather than corrected:** this entry is tagged `v1.89.0`, not `v1.88.0`. The mirror number was already spent by the previous release's tag, so per this README's "next free going forward" rule the tag takes the next number after the head rather than sorting behind it. The run is continuing rather than starting here — the 1.84.0, 1.85.0, 1.86.0 and 1.87.0 entries each record the same one-ahead pairing, which is as far back as this file establishes it: the 1.82.0 and 1.83.0 entries state no tag of their own, so no ordinal for the run is claimed. The gap widens by design as catalog releases consume numbers, and it is written down instead of silently renumbered.
+
+
 ## [1.87.0] - 2026-09-03
 
 ### Changed
