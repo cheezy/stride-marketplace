@@ -29,6 +29,16 @@ Why accepted rather than backfilled:
 
 The audit also found **zero** GitHub releases without a matching tag, so the record is incomplete in only this one direction.
 
+## [1.91.0] - 2026-09-07
+
+### Changed
+
+- **`stride` pinned to 1.76.0 and `stride-lite` to 0.16.0 — the edit-site back-reference becomes a governed, checked rule.** `stride`'s canon gains entry `edit-site-back-reference`, required of all nine ports and checked as a property rather than an anchor, and both halves of its drift check implement that property — so a port carrying a current anchor beside a governed rule and no back-reference is reported instead of passing silently. `stride-lite` carries its half of that work: a back-reference beside each of its five anchored rule statements. Both are documentation and tooling changes; neither alters a plugin contract.
+
+### Recorded divergence
+
+- **`v1.89.0` and `v1.90.0` were tagged without a `metadata.version` bump or a changelog entry, and are left as they are.** Both are half-finished releases in the sense this README defines: `v1.89.0` synced the `stride` 1.75.0 pin and `v1.90.0` the `stride-lite` 0.15.0 pin, but `metadata.version` stayed at `1.88.0` through both and neither wrote an entry. Following the `[1.66.0]` precedent, this release resumes the sequence above the head tag rather than backfilling two releases that already exist on GitHub, and records the skip here so the numbers are not unexplained. `metadata.version` moves 1.88.0 → 1.91.0 in this commit, which re-aligns all four records.
+
 ## [1.88.0] - 2026-09-04
 
 ### Changed
