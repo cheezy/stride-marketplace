@@ -29,6 +29,16 @@ Why accepted rather than backfilled:
 
 The audit also found **zero** GitHub releases without a matching tag, so the record is incomplete in only this one direction.
 
+## [1.93.0] - 2026-09-10
+
+### Changed
+
+- **`stride` pinned to 1.78.0 — the Stop gate's blind spots, closed on both halves.** The gate is the mechanism that keeps an agent working through the Ready queue, and it silently failed to fire: a completion curl written with a stdout redirect was permitted, the hook recovered no response body, no loop-state record was written, and that record is part of the gate's only block condition. Nothing was logged. Goal G432 closes it in seven parts — the curl guard now refuses a shell stdout redirect, judged by file descriptor rather than by operator so stderr redirection stays permitted; the PowerShell half, which had carried the guard one rule short rather than not at all, is brought level; an absent response body announces instead of returning silently; the gate gains a second block condition for a claim held and abandoned, which loop state structurally cannot see; a comment that claimed an enforcement the guard never performed is corrected; the re-block budget becomes a recorded decision with its accepted risk named; and Test Group 42 proves the property end to end with a negative control per assertion, each checked against the pre-fix code. Two specialist security findings are fixed and pinned. This is a plugin-behaviour change, not documentation only: a curl shape that was permitted is now refused, and a session end that was permitted is now blocked.
+
+### Recorded divergence
+
+- **`v1.92.0` was tagged with a `metadata.version` bump but no changelog entry, and is left as it is.** It synced the `stride` 1.77.0 pin and moved `metadata.version` 1.91.0 → 1.92.0, so unlike the `v1.89.0`/`v1.90.0` pair recorded below it is only half-missing — the version record is correct and only the entry is absent. Following the same precedent this file already sets twice, the sequence resumes above the head tag rather than backfilling a release that exists on GitHub, and the skip is recorded here so the gap between the `[1.91.0]` entry and this one is not unexplained.
+
 ## [1.91.0] - 2026-09-07
 
 ### Changed
