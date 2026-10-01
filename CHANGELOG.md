@@ -29,6 +29,12 @@ Why accepted rather than backfilled:
 
 The audit also found **zero** GitHub releases without a matching tag, so the record is incomplete in only this one direction.
 
+## [1.95.0] - 2026-10-01
+
+### Changed
+
+- **`stride-ideation` pinned to 0.12.0 — ship safety, self-contained command steps, and `--batch`.** `/stridify` now ships through one tested script, `lib/ship.sh`, that keeps the API token off every command line, file and output, re-validates the exact payload it sends, and refuses one containing the token. Every command fragment runs correctly in the fresh shell each Bash call gets; artifact commits no longer sweep in the user's staged work; the ideation skill actually autosaves and `.stride/` ignores itself; the `--goal` advisory and resolver agree on what a seam is; the batch validator and a new scripted section gate reject malformed input before the decomposer or the POST. New `/stride-ideation:stridify --batch <path>` ships an existing batch without decomposing again. The `stride-ideation` table row and prose section are synced to the pin.
+
 ## [1.94.0] - 2026-10-01
 
 ### Changed
