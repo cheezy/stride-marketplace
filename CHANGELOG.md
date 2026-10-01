@@ -29,6 +29,12 @@ Why accepted rather than backfilled:
 
 The audit also found **zero** GitHub releases without a matching tag, so the record is incomplete in only this one direction.
 
+## [1.96.0] - 2026-10-01
+
+### Changed
+
+- **`stride-ideation` pinned to 0.12.1 — two parser fixes.** The reviewer agent's output-format block now parses as JSON, guarded by a new test that parses every json fence in both agent prompts, and numbered seam items count only as top-level list items, so a nested numbered step list no longer hijacks a bulleted `## Decomposition seams` section. The `stride-ideation` table row and prose section are synced to the pin.
+
 ## [1.95.0] - 2026-10-01
 
 ### Changed
