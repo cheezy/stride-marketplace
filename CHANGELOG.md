@@ -29,6 +29,17 @@ Why accepted rather than backfilled:
 
 The audit also found **zero** GitHub releases without a matching tag, so the record is incomplete in only this one direction.
 
+## [1.94.0] - 2026-10-01
+
+### Changed
+
+- **`stride` pinned to 1.80.0 — `commit_pending` is verified, the stdout guard joins the canon.** The reviewer's commit-pending carve-out excused a commit-only criterion on the orchestrator's word, and the orchestrator is the party it benefits. `commit_pending` may now carry `base_ref` and `head`, which the reviewer checks against the repository itself before requiring the criterion's commit to be absent from that range; a dispatch with neither key behaves exactly as before. The stdout-preservation curl guard is registered as fleet canon entry 11, and the drift check now derives a vendored catalog's cell from its source port's row. Also adds a `RELEASE.md` runbook. The pin moves past 1.79.0, which was tagged and released alongside 1.80.0 (it closes an escaped `>` hiding a real redirect from the curl guard's Rule 3).
+- **`stride-lite` pinned to 0.17.0 — statements where a rule has no subject.** The plugin states why the curl guard and a stop gate have nothing to act on in a plugin that calls no API, stops claiming the canon requires the `reason_code` vocabulary of every port, corrects its README's stale "no marketplace" note, and adds a `RELEASE.md` runbook. Documentation and contract text only.
+
+### Divergence recorded
+
+- The README's *Available Plugins* row for `stride` still read `1.76.0` after `v1.92.0` and `v1.93.0` pinned 1.77.0 and 1.78.0: both releases moved `marketplace.json` and this file but not the README row. This release brings the row to the current pin rather than renumbering anything.
+
 ## [1.93.0] - 2026-09-10
 
 ### Changed
