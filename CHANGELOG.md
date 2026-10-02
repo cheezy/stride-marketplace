@@ -29,6 +29,19 @@ Why accepted rather than backfilled:
 
 The audit also found **zero** GitHub releases without a matching tag, so the record is incomplete in only this one direction.
 
+## [1.97.0] - 2026-10-02
+
+### Changed
+
+- **`stride` pinned to 1.81.0 — faster, more exact reviews and dispatches.** The release brings five changes:
+  - Round two of review must be earned (canon `review-round-cap` v2).
+  - The claimed task is written to a file that subagent dispatches pass as `TASK_FILE`.
+  - The main agent plans while the explorer runs.
+  - The Stop gate no longer blocks while a stride subagent is still running.
+  - Task discovery is slim.
+
+  The `stride` table row and prose section are synced to the pin, and `metadata.version` moves to 1.97.0.
+
 ## [1.96.0] - 2026-10-01
 
 ### Changed
