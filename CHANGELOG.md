@@ -29,6 +29,12 @@ Why accepted rather than backfilled:
 
 The audit also found **zero** GitHub releases without a matching tag, so the record is incomplete in only this one direction.
 
+## [1.100.0] - 2026-10-02
+
+### Changed
+
+- **`stride` pinned to 1.82.0 — a cheaper, stricter deep security review.** Specialist findings now reach `reviewer_result.issues[]` and verdict escalation takes the backing finding's severity (W2277); the specialist is dispatched beside the task-reviewer and merged after both return (W2280); later review rounds re-dispatch it only for considerations the fixes could have moved and carry the rest verbatim (W2281); and its result, like the exploratory explorer's report, goes to a file under `.stride/` that the workflow reads by the path it supplied and deletes at Step 7 (W2284, W2266). The result-file half needs `stride-security-review` 2.6.0 (catalog v1.99.0); with an older one the inline result is read as before. The catalog `description` is unchanged.
+
 ## [1.99.0] - 2026-10-02
 
 ### Changed
