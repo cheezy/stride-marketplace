@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Stride task management skills for AI agents",
-    "version": "1.98.0"
+    "version": "1.99.0"
   },
   "plugins": [
     {
@@ -26,7 +26,7 @@
         "url": "https://github.com/cheezy/stride-security-review.git"
       },
       "description": "AI-powered security review of code changes via /stride-security-review:security-review: diff or full-repo scans, framework rule packs for web, mobile and CI/CD, SARIF output and severity gating for CI, and a considerations mode that checks a task's security_considerations were mitigated.",
-      "version": "2.5.2",
+      "version": "2.6.0",
       "strict": true
     },
     {

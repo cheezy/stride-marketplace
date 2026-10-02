@@ -29,6 +29,13 @@ Why accepted rather than backfilled:
 
 The audit also found **zero** GitHub releases without a matching tag, so the record is incomplete in only this one direction.
 
+## [1.99.0] - 2026-10-02
+
+### Changed
+
+- **`stride-security-review` pinned to 2.6.0 — a result file and a short manifest description.** The security-reviewer agent now writes its full JSON result to a caller-supplied `SECURITY_RESULT_PATH` under `.stride/` and returns at most 10 plain-text lines (W2284); results returned to the Stride main loop had totalled 1.94 MB across dispatches. The path is accepted only from the dispatch instructions, allow-listed and single-quoted; a failed write falls back to the inline document, and `/security-review` is unchanged. The plugin's own `plugin.json` description drops from 1,273 to 294 characters and is capped at 300 (W2288). The catalog `description` is unchanged (288 characters).
+- **Recorded divergence, not corrected:** the README table cell for `stride-security-review` never gained its v2.5.2 clause; this release appends only the v2.6.0 clause rather than rewriting the cell.
+
 ## [1.98.0] - 2026-10-02
 
 ### Changed
