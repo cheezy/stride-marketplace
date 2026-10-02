@@ -29,6 +29,13 @@ Why accepted rather than backfilled:
 
 The audit also found **zero** GitHub releases without a matching tag, so the record is incomplete in only this one direction.
 
+## [1.98.0] - 2026-10-02
+
+### Changed
+
+- **`stride-exploratory-testing` pinned to 0.3.0 — an inline explorer card and a report-file contract.** The explorer now carries the exact `Critical` / `High` / `Moderate` / `Minor` severity ladder, oracles, RIMGEA and stop rules inline instead of in skills it never loaded (W2261), and can write its full findings to a caller-supplied `EXPLORATORY_REPORT_PATH` while returning a summary of at most 2,048 bytes, with its inline output unchanged when no path is given (W2266). The entry's `version`, the table row, the prose section and `metadata.version` (1.98.0) are synced in this one commit.
+- **Every plugin `description` is now a short summary.** The entries had grown by appending a sentence per release until they were unreadable in Claude Code's plugin browser: `stride` reached 20,862 characters, `stride-lite` 7,727, `stride-security-review` 2,631 and `stride-exploratory-testing` 1,399. Each is now a two-sentence summary of 198 to 288 characters (`stride-ideation` was already 283 and is unchanged). No version pin moved except `stride-exploratory-testing`'s. The release history those sentences carried is still in each plugin's `CHANGELOG.md` and in this README. The README's release ritual now caps a description at about 300 characters and forbids per-version sentences.
+
 ## [1.97.0] - 2026-10-02
 
 ### Changed
