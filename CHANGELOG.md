@@ -29,6 +29,12 @@ Why accepted rather than backfilled:
 
 The audit also found **zero** GitHub releases without a matching tag, so the record is incomplete in only this one direction.
 
+## [1.101.0] - 2026-10-04
+
+### Changed
+
+- **`stride` pinned to 1.83.0 — a fresh context per task, a stale-install warning, and a lighter hot path.** Asking to work a goal, the queue or several tasks now runs each eligible task in its own `stride:task-runner` by default, with `STRIDE_DISPATCHER_MODE=0` or "run inline" as the opt-out (W2250); Step 0 warns when the installed plugin is older than this catalog's pin (W2251); rationale and provenance move out of the orchestrator, `review-block-extraction.md`, the completion skill and the task-reviewer into `docs/` with every gate and contract kept inline, and their byte budgets drop (W2257, W2258).
+
 ## [1.100.0] - 2026-10-02
 
 ### Changed
