@@ -29,6 +29,12 @@ Why accepted rather than backfilled:
 
 The audit also found **zero** GitHub releases without a matching tag, so the record is incomplete in only this one direction.
 
+## [1.102.0] - 2026-10-04
+
+### Changed
+
+- **`stride` pinned to 1.84.0 and `stride-exploratory-testing` pinned to 0.4.0, together.** One catalog release carries both pins because they depend on each other: explorer 0.4.0 returns `blocked` without the `AUTHORIZED_NON_PRODUCTION` and `ALLOWED_HOSTS` lines that `stride` 1.84.0's Step 5.5 now sends. Explorer 0.4.0 also adds a checkable output contract (`contract_version` `1.0`, `status` from `stop_reason`, `replicated` and `provisional` on bugs), cleanup of what it started, `curl` instead of `WebFetch` with a `no_observation_surface` ending, verify mode, an unattended `/harden`, ranged reads and shorter always-loaded descriptions (G449–G451). `stride` 1.84.0's Step 5.5 reads that contract: grouped and parallel charters, a fixed dispatch template, advisory unreplicated or provisional Criticals, verify-mode re-checks, an unattended Step 5.6, and a trimmed hot path. It also adds the measured G446–G448 dispatcher-mode run. Both catalog `description`s are unchanged.
+
 ## [1.101.0] - 2026-10-04
 
 ### Changed
