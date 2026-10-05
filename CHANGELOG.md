@@ -29,6 +29,12 @@ Why accepted rather than backfilled:
 
 The audit also found **zero** GitHub releases without a matching tag, so the record is incomplete in only this one direction.
 
+## [1.103.0] - 2026-10-05
+
+### Changed
+
+- **`stride` pinned to 1.85.0.** It gates the causes of review rework found in the G455 analysis. The task-reviewer maps every `testing_strategy` item to a covering test, enforces break-it evidence that new and changed tests can fail, verifies the factual statements a diff adds, and flags untouched twins and mirrors. The task-explorer reports task statements the current code contradicts. The creation skills and the decomposer author a `behaviour_test_matrix` by default for testable tasks, and the enricher and decomposer run a cross-field consistency pass. No task field, server or reviewer `schema_version` change. The catalog `description` is unchanged.
+
 ## [1.102.0] - 2026-10-04
 
 ### Changed
