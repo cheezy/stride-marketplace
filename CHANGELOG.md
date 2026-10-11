@@ -29,6 +29,12 @@ Why accepted rather than backfilled:
 
 The audit also found **zero** GitHub releases without a matching tag, so the record is incomplete in only this one direction.
 
+## [1.104.0] - 2026-10-10
+
+### Changed
+
+- **`stride` pinned to 1.86.0 and `stride-security-review` pinned to 2.7.0, together.** One catalog release carries both pins because their dispatch contract changed together (W2278): `stride` 1.86.0 sends the one mode tag and the task-reviewer's diff, and 2.7.0 makes that tag the agent's one accepted spelling. Neither breaks the other's older release. `stride-security-review` 2.7.0 (G452–G454) adds an eval that scores this agent, a consistent and read-only considerations mode with a tool budget, `--rci`/`--fail-on`/baseline fixes, and a 15 KB core prompt with framework packs read on demand. `stride` 1.86.0 also lets the task-reviewer leave per-consideration verdicts to the specialist when it grades them all (W2283). Both catalog `description`s are unchanged. The `stride` row's summary cell still stops at v1.69.0, as it has since that release; the per-plugin prose carries each version.
+
 ## [1.103.0] - 2026-10-05
 
 ### Changed

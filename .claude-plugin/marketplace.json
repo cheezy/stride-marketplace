@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Stride task management skills for AI agents",
-    "version": "1.103.0"
+    "version": "1.104.0"
   },
   "plugins": [
     {
@@ -16,7 +16,7 @@
         "url": "https://github.com/cheezy/stride.git"
       },
       "description": "Drive the full Stride kanban task lifecycle from Claude Code: claim, explore, implement, review and complete tasks with automatic lifecycle hooks, and create, enrich and decompose goals and tasks. Release history is in the plugin's CHANGELOG.",
-      "version": "1.85.0",
+      "version": "1.86.0",
       "strict": true
     },
     {
@@ -26,7 +26,7 @@
         "url": "https://github.com/cheezy/stride-security-review.git"
       },
       "description": "AI-powered security review of code changes via /stride-security-review:security-review: diff or full-repo scans, framework rule packs for web, mobile and CI/CD, SARIF output and severity gating for CI, and a considerations mode that checks a task's security_considerations were mitigated.",
-      "version": "2.6.0",
+      "version": "2.7.0",
       "strict": true
     },
     {
