@@ -29,6 +29,12 @@ Why accepted rather than backfilled:
 
 The audit also found **zero** GitHub releases without a matching tag, so the record is incomplete in only this one direction.
 
+## [1.105.0] - 2026-10-15
+
+### Changed
+
+- **`stride-security-review` pinned to 2.7.1.** A security fix to the reproduction probe sandbox that 2.7.0 introduced (D376): the probe refuses to run when `HOME` is unusable or the copy sits under it, macOS denies reads under `HOME`, running or loading code from the copy and launchd job creation, and Linux masks `HOME` and `/var/tmp`. It also carries W2287's deep-review measurement report. The catalog `description` is unchanged.
+
 ## [1.104.0] - 2026-10-10
 
 ### Changed
