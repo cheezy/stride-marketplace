@@ -29,6 +29,12 @@ Why accepted rather than backfilled:
 
 The audit also found **zero** GitHub releases without a matching tag, so the record is incomplete in only this one direction.
 
+## [1.106.0] - 2026-10-16
+
+### Changed
+
+- **`stride-security-review` pinned to 2.7.2.** D377 stops the reviewer's git commands and the probe's copy step running programs the reviewed repository configures; D378 denies signals, process-information calls, task ports and POSIX and System V IPC across the macOS probe box; and two `--fail-on` gate guards return from the OpenCode port (a verdict out of position fails the gate, and the reference transforms read exactly one findings document). The catalog `description` is unchanged.
+
 ## [1.105.0] - 2026-10-15
 
 ### Changed
