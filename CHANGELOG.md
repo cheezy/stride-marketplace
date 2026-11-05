@@ -29,6 +29,12 @@ Why accepted rather than backfilled:
 
 The audit also found **zero** GitHub releases without a matching tag, so the record is incomplete in only this one direction.
 
+## [1.107.0] - 2026-11-05
+
+### Changed
+
+- **`stride` pinned to 1.87.0 and `stride-exploratory-testing` pinned to 0.5.0, together.** One catalog release carries both pins because they work as a pair: `stride` 1.87.0's Step 0 reads the `.exploratory.md` that explorer 0.5.0 defines, and its Step 5.5 sends the `PROBE_HARNESS` lines that only 0.5.0 understands. `stride` 1.87.0 builds Step 5.5 charters from manual tests, edge cases and change-risk lenses, refuses to count a signed-out session on a members-only target, adds a main-loop visual pass, an outcome-and-owner completion gate and a goal-scope pass, and writes charter-ready manual tests at authoring. Explorer 0.5.0 adds the signed-in probe harness (contract `1.1`), change-mode chartering, twelve change-risk lenses and two oracles. Both catalog `description`s are unchanged.
+
 ## [1.106.0] - 2026-10-16
 
 ### Changed
