@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Stride task management skills for AI agents",
-    "version": "1.107.0"
+    "version": "1.108.0"
   },
   "plugins": [
     {
@@ -66,7 +66,7 @@
         "url": "https://github.com/cheezy/stride-exploratory-testing.git"
       },
       "description": "Charter-based exploratory testing in Claude Code: plan charters, run budgeted sessions against a running app under an absolute safety boundary, judge results with oracles, and capture findings as a session sheet and debrief.",
-      "version": "0.5.0",
+      "version": "0.5.1",
       "strict": true
     }
   ]

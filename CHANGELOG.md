@@ -29,6 +29,12 @@ Why accepted rather than backfilled:
 
 The audit also found **zero** GitHub releases without a matching tag, so the record is incomplete in only this one direction.
 
+## [1.108.0] - 2026-11-06
+
+### Changed
+
+- **`stride-exploratory-testing` pinned to 0.5.1.** A documentation and test release: it adds `docs/porting-g503.md`, the guide the other exploratory-testing editions port G503 from, and a structure check that every relative link under `docs/` resolves inside the plugin. No agent, skill or command changed, so `stride` 1.87.0 still pairs with it unchanged. The catalog `description` is unchanged.
+
 ## [1.107.0] - 2026-11-05
 
 ### Changed
