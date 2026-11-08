@@ -29,6 +29,12 @@ Why accepted rather than backfilled:
 
 The audit also found **zero** GitHub releases without a matching tag, so the record is incomplete in only this one direction.
 
+## [1.109.0] - 2026-11-08
+
+### Changed
+
+- **`stride-security-review` pinned to 2.7.3.** The reproduction probe ends the snippet it starts and that snippet's process group, in any shell, keeps it off your terminal, and unlocks its copy from inside the box before removing it; on macOS a process that leaves the group, such as one that calls `setsid()`, can still outlive it, inside the box. On Linux it hides all of `/var` and refuses when a host socket is reachable. Its tool lookups skip empty and relative `PATH` entries, its exit trap uses only the system directories, and it refuses a relative `TMPDIR`. The Linux `bwrap` path has not been run on any host. The catalog `description` is unchanged.
+
 ## [1.108.0] - 2026-11-06
 
 ### Changed
