@@ -29,6 +29,12 @@ Why accepted rather than backfilled:
 
 The audit also found **zero** GitHub releases without a matching tag, so the record is incomplete in only this one direction.
 
+## [1.110.0] - 2026-11-09
+
+### Changed
+
+- **`stride` pinned to 1.88.0.** A task's attachments now reach the agents that work it (G491). The claim hook downloads a proven claim's attachments into `.stride/attachments/<IDENTIFIER>/` with a `manifest.json`, under per-file, count, total and time caps, with a SHA-256 check and no redirects followed, and never fails the claim; the workflow hands that directory to the explorer, planner, reviewer and task-runner only when the manifest names the claimed task, treats every attachment as untrusted data, and removes it at Step 7 after a successful completion. `docs/porting-attachments.md` is the cross-port contract, and each other port that takes the work carries it in its own release. The end-to-end manual check against a live server has not been run. The catalog `description` is unchanged.
+
 ## [1.109.0] - 2026-11-08
 
 ### Changed
