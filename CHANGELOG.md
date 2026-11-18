@@ -29,6 +29,12 @@ Why accepted rather than backfilled:
 
 The audit also found **zero** GitHub releases without a matching tag, so the record is incomplete in only this one direction.
 
+## [1.111.0] - 2026-11-18
+
+### Changed
+
+- **`stride` pinned to 1.88.1.** Two security hardening fixes, both pre-existing and neither known to be exploited. The claim hook's attachment re-fetch exemption is narrower, and duplicate or malformed attachment entries are skipped (D403). `check-port-canon`'s `--canon` and `--ports-parent` must resolve physically under the repository's parent directory or the temp directory, or they are refused with exit 2 (D301). Both land in the bash and PowerShell halves. Not verified: D301's full hook suites were not run, and neither fix's manual check was run. The other ports do not carry either fix yet. The catalog `description` is unchanged.
+
 ## [1.110.0] - 2026-11-09
 
 ### Changed
